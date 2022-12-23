@@ -20,25 +20,47 @@ struct Song : Hashable{
     var time : String
 }
 
+extension UIColor {
+    convenience init(hexString: String) {
+        let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int = UInt64()
+        Scanner(string: hex).scanHexInt64(&int)
+        let a, r, g, b: UInt64
+        switch hex.count {
+        case 3: // RGB (12-bit)
+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (a, r, g, b) = (255, 0, 0, 0)
+        }
+        self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
+    }
+}
+
 struct ContentView: View {
      
     var albums = [Album(name: "Ngọt", image: "album1", songs: [Song(name: "Song 1", time: "1:00"),
-        Song(name: "Song2", time: "1:00"),
+        Song(name: "Song 2", time: "1:00"),
         Song(name: "Song 3", time: "1:00")]),
     
-                  Album(name: "Ngbthg", image: "album2", songs: [Song(name: "Song 1", time: "1:00"),
-                      Song(name: "Song2", time: "1:00"),
-                      Song(name: "Song 3", time: "1:00")]),
+                  Album(name: "Ngbthg", image: "album2", songs: [Song(name: "Song 4", time: "1:00"),
+                      Song(name: "Song 5", time: "1:00"),
+                      Song(name: "Song 6", time: "1:00")]),
     
-                  Album(name: "3 (tuyển tập nhạc Ngọt mới trẻ sôi động 2019)", image: "album3", songs: [Song(name: "Song 1", time: "1:00"),
-                      Song(name: "Song2", time: "1:00"),
-                      Song(name: "Song 3", time: "1:00")]),
+                  Album(name: "3 (tuyển tập nhạc Ngọt mới trẻ sôi động 2019)", image: "album3", songs: [Song(name: "Song 7", time: "1:00"),
+                      Song(name: "Song 8", time: "1:00"),
+                      Song(name: "Song 9", time: "1:00")]),
     
-                  Album(name: "Gieo", image: "album4", songs: [Song(name: "Song 1", time: "1:00"),
-                      Song(name: "Song2", time: "1:00"),
-                      Song(name: "Song 3", time: "1:00")])]
+                  Album(name: "Gieo", image: "album4", songs: [Song(name: "Song 10", time: "1:00"),
+                      Song(name: "Song 11", time: "1:00"),
+                      Song(name: "Song 12", time: "1:00")])]
     
-    var currentAlbum : Album?
+    @State private var currentAlbum : Album?
+    
+    
     
     var body: some View {
         NavigationView{
@@ -47,7 +69,9 @@ struct ContentView: View {
                     LazyHStack{
                         ForEach(self.albums, id: \.self, content: {
                             album in
-                            AlbumArt(album: album)
+                            AlbumArt(album: album).onTapGesture {
+                                self.currentAlbum = album
+                            }
                             
                         })
                     }
@@ -56,14 +80,19 @@ struct ContentView: View {
             
                 LazyVStack{
                     ForEach((self.currentAlbum?.songs ?? self.albums.first?.songs) ?? [Song(name: "Song 1", time: "1:00"),
-                        Song(name: "Song2", time: "1:00"),
+                        Song(name: "Song 2", time: "1:00"),
                         Song(name: "Song 3", time: "1:00")], id: \.self, content: {
                         song in
                         SongCell(song: song)
+                 
+                       
                     })
-                }
-            }
-        }
+                }.background(Color(UIColor(hexString: "#1db954"))).clipped().cornerRadius(20).shadow(radius: 10)
+            }.background(Color.black).navigationTitle("Ngọt band").toolbarBackground(
+                Color(UIColor(hexString: "#1db954")),
+                for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+        }.foregroundColor(Color.white)
     }
 }
 
@@ -72,7 +101,7 @@ struct AlbumArt : View{
     var body: some View{
         LazyVStack{
             Image(album.image).resizable().frame(width: 180, height: 180, alignment: .center).clipped().cornerRadius(20).shadow(radius: 10).padding(20)
-            Text(album.name).frame(height: 30).foregroundColor(.black)
+            Text(album.name).frame(height: 30).foregroundColor(Color.white)
         }
         
     }
@@ -81,12 +110,21 @@ struct AlbumArt : View{
 struct SongCell : View {
     var song : Song
     var body: some View{
-        EmptyView()
+        HStack{
+            ZStack{
+                Circle().frame(width: 30, height: 30, alignment: .center).foregroundColor(.blue)
+                Circle().frame(width: 10, height: 10, alignment: .center).foregroundColor(.white)
+            }
+            Text(song.name).bold().foregroundColor(Color.black)
+            Spacer()
+            Text(song.time).foregroundColor(Color.black)
+        }.padding(20)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+
     }
 }
