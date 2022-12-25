@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct Album : Hashable{
     var id = UUID()
@@ -42,21 +43,7 @@ extension UIColor {
 
 struct ContentView: View {
     
-    var albums = [Album(name: "Ngọt", image: "album1", songs: [Song(name: "Song 1", time: "1:00"),
-                                                               Song(name: "Song 2", time: "1:00"),
-                                                               Song(name: "Song 3", time: "1:00")]),
-                  
-                  Album(name: "Ngbthg", image: "album2", songs: [Song(name: "Song 4", time: "1:00"),
-                                                                 Song(name: "Song 5", time: "1:00"),
-                                                                 Song(name: "Song 6", time: "1:00")]),
-                  
-                  Album(name: "3 (tuyển tập nhạc Ngọt mới trẻ sôi động 2019)", image: "album3", songs: [Song(name: "Song 7", time: "1:00"),
-                                                                                                        Song(name: "Song 8", time: "1:00"),
-                                                                                                        Song(name: "Song 9", time: "1:00")]),
-                  
-                  Album(name: "Gieo", image: "album4", songs: [Song(name: "Song 10", time: "1:00"),
-                                                               Song(name: "Song 11", time: "1:00"),
-                                                               Song(name: "Song 12", time: "1:00")])]
+    @ObservedObject var data : OurData
     
     @State private var currentAlbum : Album?
     
@@ -67,7 +54,7 @@ struct ContentView: View {
             ScrollView{
                 ScrollView(.horizontal, showsIndicators: false, content: {
                     LazyHStack{
-                        ForEach(self.albums, id: \.self, content: {
+                        ForEach(self.data.albums, id: \.self, content: {
                             album in
                             AlbumArt(album: album, isWithText: true).onTapGesture {
                                 self.currentAlbum = album
@@ -79,14 +66,21 @@ struct ContentView: View {
                 
                 
                 LazyVStack{
-                    ForEach((self.currentAlbum?.songs ?? self.albums.first?.songs) ?? [Song(name: "Song 1", time: "1:00"),
-                                                                                       Song(name: "Song 2", time: "1:00"),
-                                                                                       Song(name: "Song 3", time: "1:00")], id: \.self, content: {
-                        song in
-                        SongCell(album: self.currentAlbum ?? albums.first!, song: song)
-                        
-                        
-                    })
+                    if self.data.albums.first == nil{
+                        EmptyView()
+                    }
+                    else{
+                        ForEach((self.currentAlbum?.songs ?? self.data.albums.first?.songs) ?? [Song(name: "Song 1", time: "1:00"),
+                                                                                           Song(name: "Song 2", time: "1:00"),
+                                                                                           Song(name: "Song 3", time: "1:00")], id: \.self, content: {
+                            song in
+                            SongCell(album: self.currentAlbum ?? self.data.albums.first!, song: song)
+                            
+                            
+                        })
+                    }
+                
+                   
                 }.background(Color(UIColor(hexString: "#1db954"))).clipped().cornerRadius(20).shadow(radius: 10)
             }.background(Color.black).navigationTitle("Ngọt band").toolbarBackground(
                 Color(UIColor(hexString: "#1db954")),
@@ -129,11 +123,4 @@ struct SongCell : View {
     }
     
     
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-        
-    }
 }
