@@ -9,6 +9,10 @@ import Foundation
 
 import SwiftUI
 
+import Firebase
+import FirebaseStorage
+import AVFoundation
+
 struct PlayerView : View{
     var album : Album
     var song : Song
@@ -42,6 +46,16 @@ struct PlayerView : View{
             }
             
             
+        }.onAppear(){
+            let storage = Storage.storage().reference(forURL: self.song.file)
+            storage.downloadURL { url, error in
+                if error != nil{
+                    print(error)
+                }else{
+                    let player = AVPlayer(url: url!)
+                    player.play()
+                }
+            }
         }
         
     }
