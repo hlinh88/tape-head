@@ -14,6 +14,8 @@
 		5E0F299329545DF9008D972A /* TapeHeadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0F299229545DF9008D972A /* TapeHeadTests.swift */; };
 		5E0F299D29545DF9008D972A /* TapeHeadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0F299C29545DF9008D972A /* TapeHeadUITests.swift */; };
 		5E0F299F29545DF9008D972A /* TapeHeadUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0F299E29545DF9008D972A /* TapeHeadUITestsLaunchTests.swift */; };
+		5E8AE27F295849B2006B60CE /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8AE27E295849B2006B60CE /* Blur.swift */; };
+		5EEF6CDB2955BBB5004CA155 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF6CDA2955BBB5004CA155 /* PlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		5E0F299829545DF9008D972A /* TapeHeadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TapeHeadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E0F299C29545DF9008D972A /* TapeHeadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeHeadUITests.swift; sourceTree = "<group>"; };
 		5E0F299E29545DF9008D972A /* TapeHeadUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeHeadUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5E8AE27E295849B2006B60CE /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
+		5EEF6CDA2955BBB5004CA155 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,8 @@
 				5E0F298329545DF5008D972A /* ContentView.swift */,
 				5E0F298529545DF9008D972A /* Assets.xcassets */,
 				5E0F298729545DF9008D972A /* Preview Content */,
+				5EEF6CDA2955BBB5004CA155 /* PlayerView.swift */,
+				5E8AE27E295849B2006B60CE /* Blur.swift */,
 			);
 			path = TapeHead;
 			sourceTree = "<group>";
@@ -257,7 +263,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EEF6CDB2955BBB5004CA155 /* PlayerView.swift in Sources */,
 				5E0F298429545DF5008D972A /* ContentView.swift in Sources */,
+				5E8AE27F295849B2006B60CE /* Blur.swift in Sources */,
 				5E0F298229545DF5008D972A /* TapeHeadApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

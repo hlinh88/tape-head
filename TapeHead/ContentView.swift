@@ -41,22 +41,22 @@ extension UIColor {
 }
 
 struct ContentView: View {
-     
+    
     var albums = [Album(name: "Ngọt", image: "album1", songs: [Song(name: "Song 1", time: "1:00"),
-        Song(name: "Song 2", time: "1:00"),
-        Song(name: "Song 3", time: "1:00")]),
-    
+                                                               Song(name: "Song 2", time: "1:00"),
+                                                               Song(name: "Song 3", time: "1:00")]),
+                  
                   Album(name: "Ngbthg", image: "album2", songs: [Song(name: "Song 4", time: "1:00"),
-                      Song(name: "Song 5", time: "1:00"),
-                      Song(name: "Song 6", time: "1:00")]),
-    
+                                                                 Song(name: "Song 5", time: "1:00"),
+                                                                 Song(name: "Song 6", time: "1:00")]),
+                  
                   Album(name: "3 (tuyển tập nhạc Ngọt mới trẻ sôi động 2019)", image: "album3", songs: [Song(name: "Song 7", time: "1:00"),
-                      Song(name: "Song 8", time: "1:00"),
-                      Song(name: "Song 9", time: "1:00")]),
-    
+                                                                                                        Song(name: "Song 8", time: "1:00"),
+                                                                                                        Song(name: "Song 9", time: "1:00")]),
+                  
                   Album(name: "Gieo", image: "album4", songs: [Song(name: "Song 10", time: "1:00"),
-                      Song(name: "Song 11", time: "1:00"),
-                      Song(name: "Song 12", time: "1:00")])]
+                                                               Song(name: "Song 11", time: "1:00"),
+                                                               Song(name: "Song 12", time: "1:00")])]
     
     @State private var currentAlbum : Album?
     
@@ -69,7 +69,7 @@ struct ContentView: View {
                     LazyHStack{
                         ForEach(self.albums, id: \.self, content: {
                             album in
-                            AlbumArt(album: album).onTapGesture {
+                            AlbumArt(album: album, isWithText: true).onTapGesture {
                                 self.currentAlbum = album
                             }
                             
@@ -77,15 +77,15 @@ struct ContentView: View {
                     }
                 } )
                 
-            
+                
                 LazyVStack{
                     ForEach((self.currentAlbum?.songs ?? self.albums.first?.songs) ?? [Song(name: "Song 1", time: "1:00"),
-                        Song(name: "Song 2", time: "1:00"),
-                        Song(name: "Song 3", time: "1:00")], id: \.self, content: {
+                                                                                       Song(name: "Song 2", time: "1:00"),
+                                                                                       Song(name: "Song 3", time: "1:00")], id: \.self, content: {
                         song in
-                        SongCell(song: song)
-                 
-                       
+                        SongCell(album: self.currentAlbum ?? albums.first!, song: song)
+                        
+                        
                     })
                 }.background(Color(UIColor(hexString: "#1db954"))).clipped().cornerRadius(20).shadow(radius: 10)
             }.background(Color.black).navigationTitle("Ngọt band").toolbarBackground(
@@ -98,33 +98,42 @@ struct ContentView: View {
 
 struct AlbumArt : View{
     var album : Album
+    var isWithText : Bool
     var body: some View{
         LazyVStack{
             Image(album.image).resizable().frame(width: 180, height: 180, alignment: .center).clipped().cornerRadius(20).shadow(radius: 10).padding(20)
-            Text(album.name).frame(height: 30).foregroundColor(Color.white)
+            if isWithText == true {
+                Text(album.name).frame(height: 30).foregroundColor(Color.white)
+            }
+            
         }
         
     }
 }
 
 struct SongCell : View {
+    var album : Album
     var song : Song
     var body: some View{
-        HStack{
-            ZStack{
-                Circle().frame(width: 30, height: 30, alignment: .center).foregroundColor(.blue)
-                Circle().frame(width: 10, height: 10, alignment: .center).foregroundColor(.white)
-            }
-            Text(song.name).bold().foregroundColor(Color.black)
-            Spacer()
-            Text(song.time).foregroundColor(Color.black)
-        }.padding(20)
+        NavigationLink(destination: PlayerView(album: album, song: song),
+                       label: {
+            HStack{
+                ZStack{
+                    Circle().frame(width: 30, height: 30, alignment: .center).foregroundColor(.blue)
+                    Circle().frame(width: 10, height: 10, alignment: .center).foregroundColor(.white)
+                }
+                Text(song.name).bold().foregroundColor(Color.black)
+                Spacer()
+                Text(song.time).foregroundColor(Color.black)
+            }.padding(20)}).buttonStyle(PlainButtonStyle())
     }
+    
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-
+        
     }
 }
