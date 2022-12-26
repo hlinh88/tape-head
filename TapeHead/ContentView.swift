@@ -52,7 +52,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView{
-            ScrollView{
+            ScrollView(showsIndicators: false){
                 ScrollView(.horizontal, showsIndicators: false, content: {
                     LazyHStack{
                         ForEach(self.data.albums, id: \.self, content: {
