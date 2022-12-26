@@ -13,9 +13,13 @@ import Firebase
 import FirebaseStorage
 import AVFoundation
 
+var player = AVPlayer()
+
 struct PlayerView : View{
     var album : Album
     var song : Song
+    
+    
     
     @State var isPlaying : Bool = false
     
@@ -35,7 +39,7 @@ struct PlayerView : View{
                             Image(systemName: "arrow.left.circle").resizable()
                         }).frame(width: 50, height: 50, alignment: .center).foregroundColor(Color.black.opacity(0.2)).padding(.trailing, 15)
                         Button(action: self.playPause, label: {
-                            Image(systemName: isPlaying ? "pause.circle.fill" : "play.circle.fill").resizable()
+                            Image(systemName: isPlaying ? "play.circle.fill" : "pause.circle.fill").resizable()
                         }).frame(width: 70, height: 70, alignment: .center).foregroundColor(.blue)
                         Button(action: self.next, label: {
                             Image(systemName: "arrow.right.circle").resizable()
@@ -50,10 +54,14 @@ struct PlayerView : View{
             let storage = Storage.storage().reference(forURL: self.song.file)
             storage.downloadURL { url, error in
                 if error != nil{
-                    print(error)
+                    print(error!)
                 }else{
-                    let player = AVPlayer(url: url!)
+                    print(url?.absoluteString ?? "")
+
+                    player = AVPlayer(url: url!)
+                    
                     player.play()
+                   
                 }
             }
         }
@@ -62,6 +70,11 @@ struct PlayerView : View{
     
     func playPause(){
         self.isPlaying.toggle()
+        if isPlaying{
+            player.pause()
+        }else{
+            player.play()
+        }
     }
     
     func next() {
