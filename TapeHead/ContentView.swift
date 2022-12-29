@@ -109,7 +109,7 @@ struct SongCell : View {
     var album : Album
     var song : Song
     var body: some View{
-        NavigationLink(destination: PlayerView(album: album, song: song),
+        NavigationLink(destination: PlayerView(album: album, song: song, videoPlayerSlider: 0, videoPlayerLabel: ""),
                        label: {
             HStack{
                 ZStack{
