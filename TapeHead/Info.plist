@@ -9,6 +9,9 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>iCielCadena.ttf</string>
+		<string>CircularStd-Bold.otf</string>
+		<string>CircularStd-Medium.otf</string>
+		<string>CircularStd-Book.otf</string>
 	</array>
 </dict>
 </plist>

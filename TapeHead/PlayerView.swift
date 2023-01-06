@@ -38,16 +38,6 @@ struct PlayerView : View{
                 AlbumArt(album: album, isWithText: false)
                 Text(song.name).font(.title).fontWeight(.light).foregroundColor(.white)
                 Spacer()
-                //                Slider(value: Binding(get: {
-                //                          self.videoPlayerSlider
-                //                      }, set: { (newVal) in
-                //                          self.videoPlayerSlider = newVal
-                //                          self.updateVideoPlayerSlider()
-                //                      })){editing in
-                //                          player.currentItem?.seek(to: CMTime(seconds: Double(self.videoPlayerSlider), preferredTimescale: CMTimeScale(1000)))
-                //                      }
-                //
-                //                .padding(.horizontal)
                 
                 Slider(value: $videoPlayerSlider){editing in
                     

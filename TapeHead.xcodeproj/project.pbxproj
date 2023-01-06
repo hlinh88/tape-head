@@ -23,6 +23,9 @@
 		5E9950C42968770400A604E1 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9950C32968770400A604E1 /* SplashView.swift */; };
 		5E9950C929687F3100A604E1 /* iCielCadena.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E9950C829687F3100A604E1 /* iCielCadena.ttf */; };
 		5E9A13E72958772B00B6BBD7 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9A13E62958772B00B6BBD7 /* Data.swift */; };
+		5EA95A0A2968881900F58075 /* CircularStd-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5EA95A092968881900F58075 /* CircularStd-Bold.otf */; };
+		5EA95A0C2968885900F58075 /* CircularStd-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5EA95A0B2968885900F58075 /* CircularStd-Medium.otf */; };
+		5EA95A0E2968886E00F58075 /* CircularStd-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5EA95A0D2968886E00F58075 /* CircularStd-Book.otf */; };
 		5EEF6CDB2955BBB5004CA155 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF6CDA2955BBB5004CA155 /* PlayerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +62,9 @@
 		5E9950C32968770400A604E1 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		5E9950C829687F3100A604E1 /* iCielCadena.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iCielCadena.ttf; sourceTree = "<group>"; };
 		5E9A13E62958772B00B6BBD7 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		5EA95A092968881900F58075 /* CircularStd-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Bold.otf"; sourceTree = "<group>"; };
+		5EA95A0B2968885900F58075 /* CircularStd-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Medium.otf"; sourceTree = "<group>"; };
+		5EA95A0D2968886E00F58075 /* CircularStd-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Book.otf"; sourceTree = "<group>"; };
 		5ED13AFB2959894400B4C0A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5EEF6CDA2955BBB5004CA155 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,6 +173,9 @@
 		5E9950C529687D6400A604E1 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				5EA95A0D2968886E00F58075 /* CircularStd-Book.otf */,
+				5EA95A0B2968885900F58075 /* CircularStd-Medium.otf */,
+				5EA95A092968881900F58075 /* CircularStd-Bold.otf */,
 				5E9950C829687F3100A604E1 /* iCielCadena.ttf */,
 			);
 			path = Font;
@@ -302,10 +311,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EA95A0A2968881900F58075 /* CircularStd-Bold.otf in Resources */,
 				5E0F298929545DF9008D972A /* Preview Assets.xcassets in Resources */,
 				5E0F298629545DF9008D972A /* Assets.xcassets in Resources */,
+				5EA95A0E2968886E00F58075 /* CircularStd-Book.otf in Resources */,
 				5E8AE28129585DAA006B60CE /* GoogleService-Info.plist in Resources */,
 				5E9950C929687F3100A604E1 /* iCielCadena.ttf in Resources */,
+				5EA95A0C2968885900F58075 /* CircularStd-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

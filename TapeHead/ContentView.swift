@@ -97,10 +97,11 @@ struct AlbumArt : View{
     var isWithText : Bool
     var body: some View{
         LazyVStack{
-            Image(album.image).resizable().frame(width: 180, height: 180, alignment: .center).clipped().cornerRadius(20).shadow(radius: 10).padding(20)
+            Image(album.image).resizable().frame(width: 180, height: 180, alignment: .center).clipped().cornerRadius(20).shadow(radius: 10).padding(.horizontal, 20).padding(.top, 20)
             if isWithText == true {
-                Text(album.name).frame(height: 30).font(.custom("iCielCadena", size: 25)).foregroundColor(Color.white)
+                Text(album.name).font(.custom("CircularStd-Bold", size: 20)).foregroundColor(Color.white).lineLimit(1)
             }
+            Spacer()
             
         }
         
@@ -115,9 +116,9 @@ struct SongCell : View {
                        label: {
             HStack{
                 FontIcon.text(.materialIcon(code: .play_arrow), fontsize: 25, color: .blue)
-                Text(song.name).font(.custom("iCielCadena", size: 15)).foregroundColor(Color.black)
+                Text(song.name).font(.custom("CircularStd-Medium", size: 15)).foregroundColor(Color.black)
                 Spacer()
-                Text(song.time).font(.custom("iCielCadena", size: 15)).foregroundColor(Color.black)
+                Text(song.time).font(.custom("CircularStd-Medium", size: 15)).foregroundColor(Color.black)
             }.padding(20)}).buttonStyle(PlainButtonStyle())
     }
     
