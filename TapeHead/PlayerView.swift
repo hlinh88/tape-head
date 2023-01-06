@@ -38,13 +38,24 @@ struct PlayerView : View{
                 AlbumArt(album: album, isWithText: false)
                 Text(song.name).font(.title).fontWeight(.light).foregroundColor(.white)
                 Spacer()
-                Slider(value: Binding(get: {
-                          self.videoPlayerSlider
-                      }, set: { (newVal) in
-                          self.videoPlayerSlider = newVal
-                          self.updateVideoPlayerSlider()
-                      }))
-                      .padding(.all)
+//                Slider(value: Binding(get: {
+//                          self.videoPlayerSlider
+//                      }, set: { (newVal) in
+//                          self.videoPlayerSlider = newVal
+//                          self.updateVideoPlayerSlider()
+//                      })){editing in
+//                          player.currentItem?.seek(to: CMTime(seconds: Double(self.videoPlayerSlider), preferredTimescale: CMTimeScale(1000)))
+//                      }
+//
+//                .padding(.horizontal)
+                
+                Slider(value: $videoPlayerSlider){editing in
+                    print(videoPlayerSlider * Float(song.duration))
+                    player.currentItem?.seek(to: CMTimeMake(value: Int64(videoPlayerSlider * Float(song.duration)), timescale: 1))
+                   
+                      }
+               
+                .padding(.horizontal)
                 Text(self.videoPlayerLabel)
             
                 ZStack{
@@ -138,6 +149,13 @@ struct PlayerView : View{
             self.videoPlayerSlider = Float(CMTimeGetSeconds(currentTime) / CMTimeGetSeconds(duration))
         }
         
+    }
+    
+    func onChangeTime(){
+       
+    
+        
+         
     }
     
     

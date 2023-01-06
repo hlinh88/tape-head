@@ -20,6 +20,7 @@ struct Song : Hashable{
     var name : String
     var time : String
     var file : String
+    var duration : Int
 }
 
 extension UIColor {
@@ -71,7 +72,7 @@ struct ContentView: View {
                         EmptyView()
                     }
                     else{
-                        ForEach((self.currentAlbum?.songs ?? self.data.albums.first?.songs) ?? [Song(name: "", time: "", file: ""),
+                        ForEach((self.currentAlbum?.songs ?? self.data.albums.first?.songs) ?? [Song(name: "", time: "", file: "", duration: 0),
                                                                                            ], id: \.self, content: {
                             song in
                             SongCell(album: self.currentAlbum ?? self.data.albums.first!, song: song)

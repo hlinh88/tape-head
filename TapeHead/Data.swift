@@ -42,7 +42,7 @@ class OurData : ObservableObject{
                             }
                     
                             
-                            songsArray.append(Song(name: songName, time: songTime, file: songFile))
+                            songsArray.append(Song(name: songName, time: songTime, file: songFile, duration: durationInSeconds))
                         }
                     }
                     self.albums.append(Album(name: name, image: image, songs: songsArray))
