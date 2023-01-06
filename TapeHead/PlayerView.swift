@@ -24,9 +24,9 @@ struct PlayerView : View{
     @State var videoPlayerSlider: Float
     @State var videoPlayerLabel: String
     
-
-
-   
+    
+    
+    
     @State var isPlaying : Bool = false
     
     var body: some View{
@@ -38,26 +38,26 @@ struct PlayerView : View{
                 AlbumArt(album: album, isWithText: false)
                 Text(song.name).font(.title).fontWeight(.light).foregroundColor(.white)
                 Spacer()
-//                Slider(value: Binding(get: {
-//                          self.videoPlayerSlider
-//                      }, set: { (newVal) in
-//                          self.videoPlayerSlider = newVal
-//                          self.updateVideoPlayerSlider()
-//                      })){editing in
-//                          player.currentItem?.seek(to: CMTime(seconds: Double(self.videoPlayerSlider), preferredTimescale: CMTimeScale(1000)))
-//                      }
-//
-//                .padding(.horizontal)
+                //                Slider(value: Binding(get: {
+                //                          self.videoPlayerSlider
+                //                      }, set: { (newVal) in
+                //                          self.videoPlayerSlider = newVal
+                //                          self.updateVideoPlayerSlider()
+                //                      })){editing in
+                //                          player.currentItem?.seek(to: CMTime(seconds: Double(self.videoPlayerSlider), preferredTimescale: CMTimeScale(1000)))
+                //                      }
+                //
+                //                .padding(.horizontal)
                 
                 Slider(value: $videoPlayerSlider){editing in
-                    print(videoPlayerSlider * Float(song.duration))
+                    
                     player.currentItem?.seek(to: CMTimeMake(value: Int64(videoPlayerSlider * Float(song.duration)), timescale: 1))
-                   
-                      }
-               
+                    
+                }
+                
                 .padding(.horizontal)
                 Text(self.videoPlayerLabel)
-            
+                
                 ZStack{
                     Color.white.cornerRadius(20).shadow(radius: 10)
                     HStack{
@@ -71,7 +71,7 @@ struct PlayerView : View{
                             Image(systemName: "arrow.right.circle").resizable()
                         }).frame(width: 50, height: 50, alignment: .center).foregroundColor(Color.black.opacity(0.2)).padding(.leading, 15)
                     }
-                
+                    
                     
                 }.edgesIgnoringSafeArea(.bottom).frame(height: 200, alignment: .center)
                 
@@ -82,33 +82,33 @@ struct PlayerView : View{
             let storage = Storage.storage().reference(forURL: self.song.file)
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 updateVideoPlayerSlider()
-                 }
+            }
             storage.downloadURL { url, error in
                 if error != nil{
                     print(error!)
                 }else{
                     print(url?.absoluteString ?? "")
-
+                    
                     player = AVPlayer(url: url!)
                     
                     player.play()
-                   
+                    
                 }
             }
         }
         
     }
     
-   
+    
     
     
     func playPause(){
         self.isPlaying.toggle()
         if isPlaying{
-    
+            
             player.pause()
         }else{
-        
+            
             player.play()
         }
     }
@@ -121,10 +121,10 @@ struct PlayerView : View{
         
     }
     
-
+    
     func updateVideoPlayerSlider() {
         let currentTimeInSeconds = CMTimeGetSeconds(player.currentTime())
-
+        
         let mins = currentTimeInSeconds / 60
         let secs = currentTimeInSeconds.truncatingRemainder(dividingBy: 60)
         let timeformatter = NumberFormatter()
@@ -136,7 +136,7 @@ struct PlayerView : View{
         }
         self.videoPlayerLabel = "\(minsStr):\(secsStr)"
         self.videoPlayerSlider = Float(currentTimeInSeconds) // I don't think this is correct to show current progress, however, this update will fix the compile error
-
+        
         // 3 My suggestion is probably to show current progress properly
         if let currentItem = player.currentItem {
             let duration = currentItem.duration
@@ -151,12 +151,7 @@ struct PlayerView : View{
         
     }
     
-    func onChangeTime(){
-       
-    
-        
-         
-    }
+   
     
     
 }
