@@ -14,6 +14,7 @@
 		5E0F299329545DF9008D972A /* TapeHeadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0F299229545DF9008D972A /* TapeHeadTests.swift */; };
 		5E0F299D29545DF9008D972A /* TapeHeadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0F299C29545DF9008D972A /* TapeHeadUITests.swift */; };
 		5E0F299F29545DF9008D972A /* TapeHeadUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0F299E29545DF9008D972A /* TapeHeadUITestsLaunchTests.swift */; };
+		5E68FD43296818E500E7808D /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = 5E68FD42296818E500E7808D /* SwiftUIFontIcon */; };
 		5E8AE27F295849B2006B60CE /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8AE27E295849B2006B60CE /* Blur.swift */; };
 		5E8AE28129585DAA006B60CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E8AE28029585DAA006B60CE /* GoogleService-Info.plist */; };
 		5E8AE28429587505006B60CE /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 5E8AE28329587505006B60CE /* FirebaseDatabase */; };
@@ -65,6 +66,7 @@
 			files = (
 				5E8AE28429587505006B60CE /* FirebaseDatabase in Frameworks */,
 				5E8AE28629587505006B60CE /* FirebaseFirestore in Frameworks */,
+				5E68FD43296818E500E7808D /* SwiftUIFontIcon in Frameworks */,
 				5E8AE28829587505006B60CE /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,6 +194,7 @@
 				5E8AE28329587505006B60CE /* FirebaseDatabase */,
 				5E8AE28529587505006B60CE /* FirebaseFirestore */,
 				5E8AE28729587505006B60CE /* FirebaseStorage */,
+				5E68FD42296818E500E7808D /* SwiftUIFontIcon */,
 			);
 			productName = TapeHead;
 			productReference = 5E0F297E29545DF5008D972A /* TapeHead.app */;
@@ -267,6 +270,7 @@
 			mainGroup = 5E0F297529545DF5008D972A;
 			packageReferences = (
 				5E8AE28229587505006B60CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				5E68FD41296818E500E7808D /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */,
 			);
 			productRefGroup = 5E0F297F29545DF5008D972A /* Products */;
 			projectDirPath = "";
@@ -642,6 +646,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5E68FD41296818E500E7808D /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/huybuidac/SwiftUIFontIcon.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		5E8AE28229587505006B60CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -653,6 +665,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5E68FD42296818E500E7808D /* SwiftUIFontIcon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E68FD41296818E500E7808D /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */;
+			productName = SwiftUIFontIcon;
+		};
 		5E8AE28329587505006B60CE /* FirebaseDatabase */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5E8AE28229587505006B60CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

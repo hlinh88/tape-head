@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import SwiftUIFontIcon
 
 struct Album : Hashable{
     var id = UUID()
@@ -83,7 +84,7 @@ struct ContentView: View {
                 
                    
                 }.background(Color(UIColor(hexString: "#1db954"))).clipped().cornerRadius(20).shadow(radius: 10)
-            }.background(Color.black).navigationTitle("Ngọt band").toolbarBackground(
+            }.background(Color.black).navigationTitle("Tape Head").toolbarBackground(
                 Color(UIColor(hexString: "#1db954")),
                 for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
@@ -113,10 +114,7 @@ struct SongCell : View {
         NavigationLink(destination: PlayerView(album: album, song: song, videoPlayerSlider: 0, videoPlayerLabel: ""),
                        label: {
             HStack{
-                ZStack{
-                    Circle().frame(width: 30, height: 30, alignment: .center).foregroundColor(.blue)
-                    Circle().frame(width: 10, height: 10, alignment: .center).foregroundColor(.white)
-                }
+                FontIcon.text(.materialIcon(code: .play_arrow), fontsize: 25, color: .blue)
                 Text(song.name).bold().foregroundColor(Color.black)
                 Spacer()
                 Text(song.time).foregroundColor(Color.black)
