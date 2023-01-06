@@ -99,7 +99,7 @@ struct AlbumArt : View{
         LazyVStack{
             Image(album.image).resizable().frame(width: 180, height: 180, alignment: .center).clipped().cornerRadius(20).shadow(radius: 10).padding(20)
             if isWithText == true {
-                Text(album.name).frame(height: 30).foregroundColor(Color.white)
+                Text(album.name).frame(height: 30).font(.custom("iCielCadena", size: 25)).foregroundColor(Color.white)
             }
             
         }
@@ -115,9 +115,9 @@ struct SongCell : View {
                        label: {
             HStack{
                 FontIcon.text(.materialIcon(code: .play_arrow), fontsize: 25, color: .blue)
-                Text(song.name).bold().foregroundColor(Color.black)
+                Text(song.name).font(.custom("iCielCadena", size: 15)).foregroundColor(Color.black)
                 Spacer()
-                Text(song.time).foregroundColor(Color.black)
+                Text(song.time).font(.custom("iCielCadena", size: 15)).foregroundColor(Color.black)
             }.padding(20)}).buttonStyle(PlainButtonStyle())
     }
     

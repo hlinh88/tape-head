@@ -6,5 +6,9 @@
 	<array>
 		<string>audio</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>iCielCadena.ttf</string>
+	</array>
 </dict>
 </plist>

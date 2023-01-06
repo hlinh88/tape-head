@@ -12,13 +12,14 @@ import Firebase
 struct TapeHeadApp: App {
     
     let data = OurData()
-    
+
     init() {
         FirebaseApp.configure()
         data.loadAlbums()
     }
     var body: some Scene {
         WindowGroup {
+//            SplashView()
             ContentView(data: data)
         }
     }

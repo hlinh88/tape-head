@@ -20,6 +20,8 @@
 		5E8AE28429587505006B60CE /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 5E8AE28329587505006B60CE /* FirebaseDatabase */; };
 		5E8AE28629587505006B60CE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5E8AE28529587505006B60CE /* FirebaseFirestore */; };
 		5E8AE28829587505006B60CE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5E8AE28729587505006B60CE /* FirebaseStorage */; };
+		5E9950C42968770400A604E1 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9950C32968770400A604E1 /* SplashView.swift */; };
+		5E9950C929687F3100A604E1 /* iCielCadena.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E9950C829687F3100A604E1 /* iCielCadena.ttf */; };
 		5E9A13E72958772B00B6BBD7 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9A13E62958772B00B6BBD7 /* Data.swift */; };
 		5EEF6CDB2955BBB5004CA155 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF6CDA2955BBB5004CA155 /* PlayerView.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +56,8 @@
 		5E0F299E29545DF9008D972A /* TapeHeadUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeHeadUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5E8AE27E295849B2006B60CE /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		5E8AE28029585DAA006B60CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5E9950C32968770400A604E1 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		5E9950C829687F3100A604E1 /* iCielCadena.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iCielCadena.ttf; sourceTree = "<group>"; };
 		5E9A13E62958772B00B6BBD7 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		5ED13AFB2959894400B4C0A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5EEF6CDA2955BBB5004CA155 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
@@ -112,6 +116,7 @@
 		5E0F298029545DF5008D972A /* TapeHead */ = {
 			isa = PBXGroup;
 			children = (
+				5E9950C529687D6400A604E1 /* Font */,
 				5ED13AFB2959894400B4C0A5 /* Info.plist */,
 				5E9A13E829589AAF00B6BBD7 /* Songs */,
 				5E8AE28029585DAA006B60CE /* GoogleService-Info.plist */,
@@ -122,6 +127,7 @@
 				5EEF6CDA2955BBB5004CA155 /* PlayerView.swift */,
 				5E8AE27E295849B2006B60CE /* Blur.swift */,
 				5E9A13E62958772B00B6BBD7 /* Data.swift */,
+				5E9950C32968770400A604E1 /* SplashView.swift */,
 			);
 			path = TapeHead;
 			sourceTree = "<group>";
@@ -156,6 +162,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5E9950C529687D6400A604E1 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				5E9950C829687F3100A604E1 /* iCielCadena.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		5E9A13E829589AAF00B6BBD7 /* Songs */ = {
@@ -291,6 +305,7 @@
 				5E0F298929545DF9008D972A /* Preview Assets.xcassets in Resources */,
 				5E0F298629545DF9008D972A /* Assets.xcassets in Resources */,
 				5E8AE28129585DAA006B60CE /* GoogleService-Info.plist in Resources */,
+				5E9950C929687F3100A604E1 /* iCielCadena.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +335,7 @@
 				5E0F298429545DF5008D972A /* ContentView.swift in Sources */,
 				5E8AE27F295849B2006B60CE /* Blur.swift in Sources */,
 				5E0F298229545DF5008D972A /* TapeHeadApp.swift in Sources */,
+				5E9950C42968770400A604E1 /* SplashView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

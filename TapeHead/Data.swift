@@ -41,11 +41,12 @@ class OurData : ObservableObject{
                                 songTime = "\(durationInSeconds/60):0\(durationInSeconds%60)"
                             }
                     
-                            
+                            print(songTime)
                             songsArray.append(Song(name: songName, time: songTime, file: songFile, duration: durationInSeconds))
                         }
                     }
                     self.albums.append(Album(name: name, image: image, songs: songsArray))
+                
                 }
             }else{
                 print(error ?? "")
