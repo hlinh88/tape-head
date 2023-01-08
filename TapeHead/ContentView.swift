@@ -14,6 +14,7 @@ struct Album : Hashable{
     var name : String
     var image : String
     var songs : [Song]
+
 }
 
 struct Song : Hashable{
@@ -49,6 +50,8 @@ struct ContentView: View {
     @ObservedObject var data : OurData
     
     @State private var currentAlbum : Album?
+
+    
     
     
     
@@ -69,8 +72,7 @@ struct ContentView: View {
                                 .clipped()
                                 .cornerRadius(20)
                                 .shadow(radius: 10)
-                                .frame(width: proxy.size.width, height: proxy.size.height + (minY > 0 ? minY: 0))
-                                .offset(y: -minY)
+                                .frame(width: proxy.size.width, height: proxy.size.height + (minY > 0 ? minY : 0))
                                 .overlay(content: {
                                     ZStack(alignment: .bottom){
                                         Rectangle()
@@ -85,6 +87,7 @@ struct ContentView: View {
                                                 ], startPoint: .top, endPoint: .bottom))
                                     }
                                 })
+                                .offset(y: -minY)
 
                         }.frame(height: height + safeArea.top)
                         
@@ -135,7 +138,9 @@ struct AlbumArt : View{
         LazyVStack{
             Image(album.image).resizable().frame(width: 180, height: 180, alignment: .center).clipped().cornerRadius(20).shadow(radius: 10).padding(.horizontal, 20).padding(.top, 5)
             if isWithText == true {
-                Text(album.name).font(.custom("CircularStd-Bold", size: 20)).foregroundColor(Color.white).lineLimit(1)
+                Text(album.name).font(.custom("CircularStd-Bold", size: 20))
+                    .foregroundColor(Color.white)
+                    .lineLimit(1)
             }
             Spacer()
             
