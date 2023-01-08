@@ -41,7 +41,7 @@ class OurData : ObservableObject{
                                 songTime = "\(durationInSeconds/60):0\(durationInSeconds%60)"
                             }
                     
-                            print(songTime)
+                        
                             songsArray.append(Song(name: songName, time: songTime, file: songFile, duration: durationInSeconds))
                         }
                     }

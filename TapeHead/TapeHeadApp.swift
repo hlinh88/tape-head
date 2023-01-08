@@ -19,8 +19,7 @@ struct TapeHeadApp: App {
     }
     var body: some Scene {
         WindowGroup {
-//            SplashView()
-            ContentView(data: data)
+            SplashView(data: data)
         }
     }
 }
