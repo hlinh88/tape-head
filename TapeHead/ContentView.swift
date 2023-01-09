@@ -122,8 +122,17 @@ struct ContentView: View {
                             }
                             
                             
-                        }.background(Color(UIColor(hexString: "#1db954"))).clipped().cornerRadius(20).shadow(radius: 10)
-                    }.background(Color.black.edgesIgnoringSafeArea(.all))
+                        }
+                        .background(.black)
+                        .clipped()
+                        .cornerRadius(20)
+                        .shadow(radius: 10)
+                        .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(.white, lineWidth: 2)
+                                )
+                    }
+                    .background(Color.black.edgesIgnoringSafeArea(.all))
                 }
             }.foregroundColor(Color.white).ignoresSafeArea(.container, edges: .top)
         }.preferredColorScheme(.dark).coordinateSpace(name: "SCROLL")
@@ -136,7 +145,7 @@ struct AlbumArt : View{
     var isWithText : Bool
     var body: some View{
         LazyVStack{
-            Image(album.image).resizable().frame(width: 180, height: 180, alignment: .center).clipped().cornerRadius(20).shadow(radius: 10).padding(.horizontal, 20).padding(.top, 5)
+            Image(album.image).resizable().frame(width: 180, height: 180, alignment: .center).clipped().cornerRadius(20).shadow(color: .white, radius: 10).padding(.horizontal, 20).padding(.top, 5)
             if isWithText == true {
                 Text(album.name).font(.custom("CircularStd-Bold", size: 20))
                     .foregroundColor(Color.white)
@@ -152,15 +161,27 @@ struct AlbumArt : View{
 struct SongCell : View {
     var album : Album
     var song : Song
+    
+    @State var onHover = false
     var body: some View{
         NavigationLink(destination: PlayerView(album: album, song: song, videoPlayerSlider: 0, videoPlayerLabel: ""),
                        label: {
             HStack{
-                FontIcon.text(.materialIcon(code: .play_arrow), fontsize: 25, color: .blue)
-                Text(song.name).font(.custom("CircularStd-Medium", size: 15)).foregroundColor(Color.black).hoverEffect(.lift)
+                ZStack{
+                    Image(album.image).resizable().frame(width: 40, height: 40, alignment: .center).clipped()
+                    
+                    if onHover{
+                        FontIcon.text(.materialIcon(code: .play_arrow), fontsize: 25, color: .blue)
+                    }
+                }
+                Text(song.name).font(.custom("CircularStd-Medium", size: 15)).foregroundColor(Color.white).hoverEffect(.lift)
                 Spacer()
-                Text(song.time).font(.custom("CircularStd-Medium", size: 15)).foregroundColor(Color.black)
-            }.padding(20)}).buttonStyle(PlainButtonStyle())
+                Text(song.time).font(.custom("CircularStd-Medium", size: 15)).foregroundColor(Color.white)
+            }.padding(20)})
+            .buttonStyle(PlainButtonStyle())
+            .onHover{hover in
+                self.onHover.toggle()
+            }
     }
     
     

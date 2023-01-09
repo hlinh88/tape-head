@@ -73,16 +73,20 @@ struct PlayerView : View{
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 updateVideoPlayerSlider()
             }
+//            let url = URL(string: self.song.file)
+//            player = AVPlayer(url: url!)
+//            player.play()
+            
             storage.downloadURL { url, error in
                 if error != nil{
                     print(error!)
                 }else{
                     print(url?.absoluteString ?? "")
-                    
+
                     player = AVPlayer(url: url!)
-                    
+
                     player.play()
-                    
+
                 }
             }
         }
