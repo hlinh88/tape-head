@@ -106,6 +106,13 @@ struct ContentView: View {
                             }
                         } )
                         
+                        Rectangle()
+                        .fill(Color.white)
+                        .frame(height: 1)
+                        .padding(.top, 5)
+                        .padding(.horizontal, 20)
+                        .background(Color.black)
+                        
                         
                         LazyVStack{
                             if self.data.albums.first == nil{
@@ -127,10 +134,7 @@ struct ContentView: View {
                         .clipped()
                         .cornerRadius(20)
                         .shadow(radius: 10)
-                        .overlay(
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(.white, lineWidth: 2)
-                                )
+                        
                     }
                     .background(Color.black.edgesIgnoringSafeArea(.all))
                 }
