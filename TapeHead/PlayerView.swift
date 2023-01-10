@@ -23,6 +23,7 @@ struct PlayerView : View{
     var song : Song
     @State var videoPlayerSlider: Float
     @State var videoPlayerLabel: String
+    var currentIndex: Int
     
     
     
@@ -51,6 +52,7 @@ struct PlayerView : View{
                 ZStack{
                     Color.white.cornerRadius(20).shadow(radius: 10)
                     HStack{
+                        
                         Button(action: self.previous, label: {
                             Image(systemName: "arrow.left.circle").resizable()
                         }).frame(width: 50, height: 50, alignment: .center).foregroundColor(Color.black.opacity(0.2)).padding(.trailing, 15)
@@ -73,7 +75,7 @@ struct PlayerView : View{
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 updateVideoPlayerSlider()
             }
-            let url = URL(string: self.song.file)
+            let url = URL(string: self.album.songs[currentIndex].file)
             player = AVPlayer(url: url!)
             player.play()
          

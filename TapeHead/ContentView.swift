@@ -14,7 +14,7 @@ struct Album : Hashable{
     var name : String
     var image : String
     var songs : [Song]
-
+    
 }
 
 struct Song : Hashable{
@@ -50,7 +50,7 @@ struct ContentView: View {
     @ObservedObject var data : OurData
     
     @State private var currentAlbum : Album?
-
+    
     
     
     
@@ -88,7 +88,7 @@ struct ContentView: View {
                                     }
                                 })
                                 .offset(y: -minY)
-
+                            
                         }.frame(height: height + safeArea.top)
                         
                         
@@ -100,6 +100,7 @@ struct ContentView: View {
                                     album in
                                     AlbumArt(album: album, isWithText: true).onTapGesture {
                                         self.currentAlbum = album
+                                       
                                     }
                                     
                                 })
@@ -107,11 +108,11 @@ struct ContentView: View {
                         } )
                         
                         Rectangle()
-                        .fill(Color.white)
-                        .frame(height: 1)
-                        .padding(.top, 5)
-                        .padding(.horizontal, 20)
-                        .background(Color.black)
+                            .fill(Color.white)
+                            .frame(height: 1)
+                            .padding(.top, 5)
+                            .padding(.horizontal, 20)
+                            .background(Color.black)
                         
                         
                         LazyVStack{
@@ -119,26 +120,33 @@ struct ContentView: View {
                                 EmptyView()
                             }
                             else{
-                                ForEach((self.currentAlbum?.songs ?? self.data.albums.first?.songs) ?? [Song(name: "", time: "", file: "", duration: 0),
-                                                                                                       ], id: \.self, content: {
-                                    song in
-                                    SongCell(album: self.currentAlbum ?? self.data.albums.first!, song: song)
-                                    
-                                    
-                                })
-                            }
-                            
+//                                ForEach((self.currentAlbum?.songs ?? self.data.albums.first?.songs) ?? [Song(name: "", time: "", file: "", duration: 0), ], id: \.self, content: {
+//                                    song in
+//                                    SongCell(album: self.currentAlbum ?? self.data.albums.first!, song: song)
+//
+//
+//                                })
+//
+                                ForEach(0..<((self.currentAlbum?.songs.count ?? self.data.albums.first?.songs.count) ?? 0), id: \.self) {
+                                    i in
+                                    SongCell(album: self.currentAlbum ?? self.data.albums.first!, song: self.currentAlbum?.songs[i] ?? self.data.albums.first!.songs[i], index: i)
+                                 
+
+                                }
                             
                         }
-                        .background(.black)
-                        .clipped()
-                        .cornerRadius(20)
-                        .shadow(radius: 10)
+                        
                         
                     }
-                    .background(Color.black.edgesIgnoringSafeArea(.all))
+                    .background(.black)
+                    .clipped()
+                    .cornerRadius(20)
+                    .shadow(radius: 10)
+                    
                 }
-            }.foregroundColor(Color.white).ignoresSafeArea(.container, edges: .top)
+                .background(Color.black.edgesIgnoringSafeArea(.all))
+            }
+        }.foregroundColor(Color.white).ignoresSafeArea(.container, edges: .top)
         }.preferredColorScheme(.dark).coordinateSpace(name: "SCROLL")
     }
 }
@@ -165,10 +173,11 @@ struct AlbumArt : View{
 struct SongCell : View {
     var album : Album
     var song : Song
+    var index: Int
     
     @State var onHover = false
     var body: some View{
-        NavigationLink(destination: PlayerView(album: album, song: song, videoPlayerSlider: 0, videoPlayerLabel: ""),
+        NavigationLink(destination: PlayerView(album: album, song: song, videoPlayerSlider: 0, videoPlayerLabel: "", currentIndex: index),
                        label: {
             HStack{
                 ZStack{
@@ -182,10 +191,10 @@ struct SongCell : View {
                 Spacer()
                 Text(song.time).font(.custom("CircularStd-Medium", size: 15)).foregroundColor(Color.white)
             }.padding(20)})
-            .buttonStyle(PlainButtonStyle())
-            .onHover{hover in
-                self.onHover.toggle()
-            }
+        .buttonStyle(PlainButtonStyle())
+        .onHover{hover in
+            self.onHover.toggle()
+        }
     }
     
     
