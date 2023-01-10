@@ -33,19 +33,24 @@ class OurData : ObservableObject{
                             
                             let songFile = song.value["file"] as? String ?? "error"
                             
-                            let audioAsset = AVURLAsset.init(url: URL(string: songFile)!, options: nil)
-                            let duration = audioAsset.duration
-                            let durationInSeconds = Int(CMTimeGetSeconds(duration))
-                            var songTime = "\(durationInSeconds/60):\(durationInSeconds%60)"
-                            if durationInSeconds%60 < 10{
-                                songTime = "\(durationInSeconds/60):0\(durationInSeconds%60)"
-                            }
+//                            let audioAsset = AVURLAsset.init(url: URL(string: songFile)!, options: nil)
+//                            let duration = audioAsset.duration
+//                            let durationInSeconds = Int(CMTimeGetSeconds(duration))
+//                            var songTime = "\(durationInSeconds/60):\(durationInSeconds%60)"
+//                            if durationInSeconds%60 < 10{
+//                                songTime = "\(durationInSeconds/60):0\(durationInSeconds%60)"
+//                            }
+                            
+                            let songTime = song.value["time"] as? String ?? "error"
+                            let songDuration = song.value["duration"] as? Int ?? 0
+                         
                     
                         
-                            songsArray.append(Song(name: songName, time: songTime, file: songFile, duration: durationInSeconds))
+                            songsArray.append(Song(name: songName, time: songTime, file: songFile, duration: songDuration))
                         }
                     }
-                    self.albums.append(Album(name: name, image: image, songs: songsArray))
+                    let sortedSongs = songsArray.sorted { $0.name < $1.name }
+                    self.albums.append(Album(name: name, image: image, songs: sortedSongs))
                 
                 }
             }else{

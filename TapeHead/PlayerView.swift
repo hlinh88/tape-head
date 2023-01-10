@@ -36,7 +36,7 @@ struct PlayerView : View{
             VStack{
                 Spacer()
                 AlbumArt(album: album, isWithText: false)
-                Text(song.name).font(.title).fontWeight(.light).foregroundColor(.white)
+                Text(song.name).font(.custom("CircularStd-Medium", size: 18)).foregroundColor(.white).multilineTextAlignment(.center).padding(.horizontal, 10)
                 Spacer()
                 
                 Slider(value: $videoPlayerSlider){editing in
@@ -69,26 +69,26 @@ struct PlayerView : View{
             
             
         }.onAppear(){
-            let storage = Storage.storage().reference(forURL: self.song.file)
+//            let storage = Storage.storage().reference(forURL: self.song.file)
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 updateVideoPlayerSlider()
             }
-//            let url = URL(string: self.song.file)
-//            player = AVPlayer(url: url!)
-//            player.play()
-            
-            storage.downloadURL { url, error in
-                if error != nil{
-                    print(error!)
-                }else{
-                    print(url?.absoluteString ?? "")
-
-                    player = AVPlayer(url: url!)
-
-                    player.play()
-
-                }
-            }
+            let url = URL(string: self.song.file)
+            player = AVPlayer(url: url!)
+            player.play()
+         
+//            storage.downloadURL { url, error in
+//                if error != nil{
+//                    print(error!)
+//                }else{
+//                    print(url?.absoluteString ?? "")
+//
+//                    player = AVPlayer(url: url!)
+//
+//                    player.play()
+//
+//                }
+//            }
         }
         
     }

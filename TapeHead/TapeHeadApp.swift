@@ -10,13 +10,15 @@ import Firebase
 
 @main
 struct TapeHeadApp: App {
-    
     let data = OurData()
 
-    init() {
+    init(){
         FirebaseApp.configure()
-        data.loadAlbums()
+        data.loadAlbums()   
     }
+
+   
+    
     var body: some Scene {
         WindowGroup {
             SplashView(data: data)

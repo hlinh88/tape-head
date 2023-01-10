@@ -92,7 +92,7 @@ struct ContentView: View {
                         }.frame(height: height + safeArea.top)
                         
                         
-                        Text("Welcome to Tape Head").font(.custom("CircularStd-Bold", size: 30)).foregroundColor(Color.white)
+                        Text("Welcome to Tape Head").font(.custom("CircularStd-Bold", size: 30)).foregroundColor(Color.white).padding(.bottom, 15)
                         
                         ScrollView(.horizontal, showsIndicators: false, content: {
                             LazyHStack{
