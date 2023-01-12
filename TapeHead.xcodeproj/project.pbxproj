@@ -124,7 +124,6 @@
 			children = (
 				5E9950C529687D6400A604E1 /* Font */,
 				5ED13AFB2959894400B4C0A5 /* Info.plist */,
-				5E9A13E829589AAF00B6BBD7 /* Songs */,
 				5E8AE28029585DAA006B60CE /* GoogleService-Info.plist */,
 				5E0F298129545DF5008D972A /* TapeHeadApp.swift */,
 				5E0F298329545DF5008D972A /* ContentView.swift */,
@@ -179,22 +178,6 @@
 				5E9950C829687F3100A604E1 /* iCielCadena.ttf */,
 			);
 			path = Font;
-			sourceTree = "<group>";
-		};
-		5E9A13E829589AAF00B6BBD7 /* Songs */ = {
-			isa = PBXGroup;
-			children = (
-				5E9A13E929589ABF00B6BBD7 /* Ngọt */,
-			);
-			path = Songs;
-			sourceTree = "<group>";
-		};
-		5E9A13E929589ABF00B6BBD7 /* Ngọt */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Ngọt";
-			path = "Ngọt";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
