@@ -66,23 +66,23 @@ struct PlayerView : View{
                 Text(self.videoPlayerLabel)
                 
                 ZStack{
-                    Color.white.cornerRadius(20).shadow(radius: 10)
+                    Color.black.opacity(0.2).cornerRadius(20).shadow(radius: 10)
                     HStack{
                         Button(action: self.shuffle, label: {
                             Image(systemName: "shuffle.circle.fill").resizable()
-                        }).frame(width: 50, height: 50, alignment: .center).padding(.trailing, 15).foregroundColor(isShuffle ? .blue : .black)
+                        }).frame(width: 40, height: 40, alignment: .center).padding(.trailing, 15).foregroundColor(isShuffle ? .blue : .white)
                         Button(action: self.previous, label: {
                             Image(systemName: "arrow.left.circle").resizable()
-                        }).frame(width: 50, height: 50, alignment: .center).foregroundColor(.black).padding(.trailing, 15)
+                        }).frame(width: 40, height: 40, alignment: .center).foregroundColor(.white).padding(.trailing, 15)
                         Button(action: self.playPause, label: {
                             Image(systemName: isPlaying ? "play.circle.fill" : "pause.circle.fill").resizable()
-                        }).frame(width: 70, height: 70, alignment: .center).foregroundColor(.blue)
+                        }).frame(width: 60, height: 60, alignment: .center).foregroundColor(.blue)
                         Button(action: self.next, label: {
                             Image(systemName: "arrow.right.circle").resizable()
-                        }).frame(width: 50, height: 50, alignment: .center).foregroundColor(.black).padding(.leading, 15)
+                        }).frame(width: 40, height: 40, alignment: .center).foregroundColor(.white).padding(.leading, 15)
                         Button(action: self.replay, label: {
                             Image(systemName: "repeat.circle.fill").resizable()
-                        }).frame(width: 50, height: 50, alignment: .center).padding(.leading, 15).foregroundColor(isRepeat ? .blue : .black)
+                        }).frame(width: 40, height: 40, alignment: .center).padding(.leading, 15).foregroundColor(isRepeat ? .blue : .white)
                     }
                     
                     
