@@ -177,7 +177,7 @@ struct SongCell : View {
     
     @State var onHover = false
     var body: some View{
-        NavigationLink(destination: PlayerView(album: album, song: song, videoPlayerSlider: 0, videoPlayerLabel: "", currentIndex: index),
+        NavigationLink(destination: PlayerView(album: album, song: album.songs[index], videoPlayerSlider: 0, videoPlayerLabel: "", currentIndex: index),
                        label: {
             HStack{
                 ZStack{
