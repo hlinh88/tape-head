@@ -31,11 +31,13 @@ struct PlayerView : View{
     @State var currentIndex: Int
  
     @State var isPlaying : Bool = false
+    @State var isAnimating = false
     @State var isShuffle : Bool = false
     @State var isRepeat : Bool = false
     var foreverAnimation: Animation {
             Animation.linear(duration: 2.0)
                 .repeatForever(autoreverses: false)
+                .speed(0.3)
         }
     
     
@@ -57,10 +59,16 @@ struct PlayerView : View{
                 }.padding(.top, 20).padding(.horizontal, 20).frame(maxWidth: .infinity)
                
                 Spacer()
-                AlbumArt(album: album, isWithText: false)
-                    .rotationEffect(Angle(degrees: self.isPlaying ? 360 : 0.0))
-                    .animation(self.isPlaying ? foreverAnimation : .default)
-                Text(song.name).font(.custom("CircularStd-Bold", size: 20)).foregroundColor(.white).multilineTextAlignment(.center).padding(.horizontal, 10)
+                Image(album.image)
+                    .resizable()
+                    .frame(width: 180, height: 180, alignment: .center)
+                    .clipped()
+                    .clipShape(Circle())
+                    .shadow(color: .white, radius: 10)
+                    .rotationEffect(Angle(degrees: self.isAnimating ? 360.0 : 0.0))
+                    .animation(self.isAnimating ? foreverAnimation : .default)
+                    .onAppear{self.isAnimating = true}
+                Text(song.name).font(.custom("CircularStd-Bold", size: 20)).foregroundColor(.white).multilineTextAlignment(.center).padding(.horizontal, 10).padding(.top, 15)
                 Spacer()
                 
                 VStack{
@@ -105,7 +113,8 @@ struct PlayerView : View{
             }
             
             
-        }.navigationBarBackButtonHidden(true).onAppear(){
+        }.navigationBarBackButtonHidden(true)
+            .onAppear(){
 //            let storage = Storage.storage().reference(forURL: self.song.file)
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 updateVideoPlayerSlider()
@@ -130,11 +139,11 @@ struct PlayerView : View{
         
     }
     
-    
-    
+ 
     
     func playPause(){
         self.isPlaying.toggle()
+        self.isAnimating.toggle()
         if isPlaying{
             player.pause()
         }else{
