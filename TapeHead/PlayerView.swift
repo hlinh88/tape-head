@@ -25,13 +25,18 @@ struct PlayerView : View{
     
     var album : Album
     @State var song : Song
-    @State var videoPlayerSlider: Float
-    @State var videoPlayerLabel: String
+    @State var slider: Float
+    @State var timeLabelLeft: String
+    @State var timeLabelRight: String
     @State var currentIndex: Int
  
     @State var isPlaying : Bool = false
     @State var isShuffle : Bool = false
     @State var isRepeat : Bool = false
+    var foreverAnimation: Animation {
+            Animation.linear(duration: 2.0)
+                .repeatForever(autoreverses: false)
+        }
     
     
     var body: some View{
@@ -53,17 +58,26 @@ struct PlayerView : View{
                
                 Spacer()
                 AlbumArt(album: album, isWithText: false)
-                Text(song.name).font(.custom("CircularStd-Medium", size: 18)).foregroundColor(.white).multilineTextAlignment(.center).padding(.horizontal, 10)
+                    .rotationEffect(Angle(degrees: self.isPlaying ? 360 : 0.0))
+                    .animation(self.isPlaying ? foreverAnimation : .default)
+                Text(song.name).font(.custom("CircularStd-Bold", size: 20)).foregroundColor(.white).multilineTextAlignment(.center).padding(.horizontal, 10)
                 Spacer()
                 
-                Slider(value: $videoPlayerSlider){editing in
-                    
-                    player.currentItem?.seek(to: CMTimeMake(value: Int64(videoPlayerSlider * Float(song.duration)), timescale: 1))
-                    
-                }
+                VStack{
+                    Slider(value: $slider){editing in
+                        
+                        player.currentItem?.seek(to: CMTimeMake(value: Int64(slider * Float(song.duration)), timescale: 1))
+                        
+                    }
+            
+                    HStack{
+                        Text(self.timeLabelLeft).font(.custom("CircularStd-Medium", size: 12)).foregroundColor(.white)
+                        Spacer()
+                        Text(self.timeLabelRight).font(.custom("CircularStd-Medium", size: 12)).foregroundColor(.white)
+                    }
+                   
+                }.frame(maxWidth: .infinity).padding(.horizontal, 15)
                 
-                .padding(.horizontal)
-                Text(self.videoPlayerLabel)
                 
                 ZStack{
                     Color.black.opacity(0.2).cornerRadius(20).shadow(radius: 10)
@@ -72,13 +86,13 @@ struct PlayerView : View{
                             Image(systemName: "shuffle.circle.fill").resizable()
                         }).frame(width: 40, height: 40, alignment: .center).padding(.trailing, 15).foregroundColor(isShuffle ? .blue : .white)
                         Button(action: self.previous, label: {
-                            Image(systemName: "arrow.left.circle").resizable()
+                            Image(systemName: "backward.end.circle.fill").resizable()
                         }).frame(width: 40, height: 40, alignment: .center).foregroundColor(.white).padding(.trailing, 15)
                         Button(action: self.playPause, label: {
                             Image(systemName: isPlaying ? "play.circle.fill" : "pause.circle.fill").resizable()
-                        }).frame(width: 60, height: 60, alignment: .center).foregroundColor(.blue)
+                        }).frame(width: 60, height: 60, alignment: .center).foregroundColor(.white)
                         Button(action: self.next, label: {
-                            Image(systemName: "arrow.right.circle").resizable()
+                            Image(systemName: "forward.end.circle.fill").resizable()
                         }).frame(width: 40, height: 40, alignment: .center).foregroundColor(.white).padding(.leading, 15)
                         Button(action: self.replay, label: {
                             Image(systemName: "repeat.circle.fill").resizable()
@@ -157,10 +171,15 @@ struct PlayerView : View{
     
     
     func updateVideoPlayerSlider() {
+        let currentSongDuration = Double(self.song.duration)
         let currentTimeInSeconds = CMTimeGetSeconds(player.currentTime())
+        let currentTimeLeft = currentSongDuration - currentTimeInSeconds
         
         let mins = currentTimeInSeconds / 60
         let secs = currentTimeInSeconds.truncatingRemainder(dividingBy: 60)
+        let minsLeft = currentTimeLeft / 60
+        let secsLeft = currentTimeLeft.truncatingRemainder(dividingBy: 60)
+        
         let timeformatter = NumberFormatter()
         timeformatter.minimumIntegerDigits = 2
         timeformatter.minimumFractionDigits = 0
@@ -168,18 +187,22 @@ struct PlayerView : View{
         guard let minsStr = timeformatter.string(from: NSNumber(value: mins)), let secsStr = timeformatter.string(from: NSNumber(value: secs)) else {
             return
         }
-        self.videoPlayerLabel = "\(minsStr):\(secsStr)"
-        self.videoPlayerSlider = Float(currentTimeInSeconds)
+        guard let minsStrLeft = timeformatter.string(from: NSNumber(value: minsLeft)), let secsStrLeft = timeformatter.string(from: NSNumber(value: secsLeft)) else {
+            return
+        }
+        self.timeLabelLeft = "\(minsStr):\(secsStr)"
+        self.timeLabelRight = "\(minsStrLeft):\(secsStrLeft)"
+        self.slider = Float(currentTimeInSeconds)
         
  
         if let currentItem = player.currentItem {
             let duration = currentItem.duration
             if (CMTIME_IS_INVALID(duration)) {
-                print(self.videoPlayerSlider)
+                print(self.slider)
                 return;
             }
             let currentTime = currentItem.currentTime()
-            self.videoPlayerSlider = Float(CMTimeGetSeconds(currentTime) / CMTimeGetSeconds(duration))
+            self.slider = Float(CMTimeGetSeconds(currentTime) / CMTimeGetSeconds(duration))
         }
         
     }

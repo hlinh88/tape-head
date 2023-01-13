@@ -26,7 +26,8 @@ class OurData : ObservableObject{
                     let image = document.data()["image"] as? String ?? "album1"
                     let songs = document.data()["songs"] as? [String : [String : Any]]
                     
-                    var songsArray = [Song]()
+                    var songsArray = [Song](repeating: Song(name: "", time: "", file: "", duration: 0), count: songs!.count)
+                   
                     if let songs = songs {
                         for song in songs{
                             let songName = song.value["name"] as? String ?? "error"
@@ -43,14 +44,12 @@ class OurData : ObservableObject{
                             
                             let songTime = song.value["time"] as? String ?? "error"
                             let songDuration = song.value["duration"] as? Int ?? 0
-                         
-                    
-                        
-                            songsArray.append(Song(name: songName, time: songTime, file: songFile, duration: songDuration))
+                            let songOrder = song.value["order"] as? Int ?? 0
+                            songsArray[songOrder-1] = Song(name: songName, time: songTime, file: songFile, duration: songDuration)
+//                            songsArray.insert(Song(name: songName, time: songTime, file: songFile, duration: songDuration), at: songOrder-1)
                         }
                     }
-                    let sortedSongs = songsArray.sorted { $0.name < $1.name }
-                    self.albums.append(Album(name: name, image: image, songs: sortedSongs))
+                    self.albums.append(Album(name: name, image: image, songs: songsArray))
                 
                 }
             }else{
