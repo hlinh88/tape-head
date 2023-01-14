@@ -26,7 +26,9 @@ struct Song : Hashable{
 }
 
 class GlobalVar: ObservableObject {
-  @Published var isPlaying = false
+    @Published var isPlaying = false
+    @Published var currentSongName = ""
+   
 }
 
 
@@ -125,7 +127,7 @@ struct ContentView: View {
                         }
                         .background(Color.black.edgesIgnoringSafeArea(.all))
                     }
-                   
+                    
                     MiniPlayer(album: self.currentAlbum ?? self.data.albums.first!)
                     
                 }.foregroundColor(Color.white).ignoresSafeArea(.container, edges: .top)
@@ -196,23 +198,27 @@ struct MiniPlayer : View {
     var album : Album
     
     var body : some View {
-            ZStack{
-                Color.black.opacity(0.2).cornerRadius(20).shadow(radius: 10)
-                Image(album.image).resizable().edgesIgnoringSafeArea(.all)
-                Blur(style: .dark).edgesIgnoringSafeArea(.all)
-                HStack{
-                    Image(album.image).resizable().frame(width: 30, height: 30, alignment: .center).clipped()
-                    Spacer()
-                    Button(action: self.play ,label: {
-                        Image(systemName: global.isPlaying ? "play.fill" : "pause.fill").resizable()
-                    }).frame(width: 20, height: 20, alignment: .center).foregroundColor(.white)
-                }.padding(.horizontal, 35)
-                
-            }.edgesIgnoringSafeArea(.bottom).frame(height: 35, alignment: .bottom)
+        ZStack{
+            Color.black.opacity(0.2).cornerRadius(20).shadow(radius: 10)
+            Image(album.image).resizable().edgesIgnoringSafeArea(.all)
+            Blur(style: .dark).edgesIgnoringSafeArea(.all)
+            HStack{
+                Image(album.image).resizable().frame(width: 30, height: 30, alignment: .center).clipped()
+                Text(global.currentSongName)
+                    .font(.custom("CircularStd-Medium", size: 15))
+                    .foregroundColor(Color.white)
+                    .hoverEffect(.lift)
+                Spacer()
+                Button(action: self.playPause ,label: {
+                    Image(systemName: global.isPlaying ? "play.fill" : "pause.fill").resizable()
+                }).frame(width: 20, height: 20, alignment: .center).foregroundColor(.white)
+            
+            }.padding(.horizontal, 35)
+        }.edgesIgnoringSafeArea(.bottom).frame(height: 35, alignment: .bottom)
         
     }
     
-    func play(){
+    func playPause(){
         global.isPlaying.toggle()
         if global.isPlaying{
             player.pause()

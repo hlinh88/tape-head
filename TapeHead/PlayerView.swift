@@ -118,6 +118,7 @@ struct PlayerView : View{
             
         }.navigationBarBackButtonHidden(true)
             .onAppear(){
+                global.currentSongName = self.album.songs[currentIndex].name
                 timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                     updateSlider()
                 }
@@ -149,6 +150,7 @@ struct PlayerView : View{
             }
             currentIndex = randomInt
             self.song = self.album.songs[currentIndex]
+            global.currentSongName = self.album.songs[currentIndex].name
             let url = URL(string: self.album.songs[currentIndex].file)
             player = AVPlayer(url: url!)
             player.play()
@@ -156,6 +158,7 @@ struct PlayerView : View{
         }
         else{
             self.song = self.album.songs[(currentIndex+1) % self.album.songs.count]
+            global.currentSongName = self.album.songs[currentIndex].name
             let url = URL(string: self.album.songs[(currentIndex+1) % self.album.songs.count].file)
             self.currentIndex += 1
             player = AVPlayer(url: url!)
@@ -166,6 +169,7 @@ struct PlayerView : View{
     
     func previous(){
         self.song = self.album.songs[(currentIndex-1) % self.album.songs.count]
+        global.currentSongName = self.album.songs[currentIndex].name
         let url = URL(string: self.album.songs[(currentIndex-1) % self.album.songs.count].file)
         self.currentIndex -= 1
         player = AVPlayer(url: url!)
@@ -188,7 +192,6 @@ struct PlayerView : View{
         let currentTimeInSeconds = CMTimeGetSeconds(player.currentTime())
         let currentTimeLeft = currentSongDuration - currentTimeInSeconds
         if currentTimeInSeconds == currentSongDuration{
-            print("Yo")
             self.song = self.album.songs[(currentIndex+1) % self.album.songs.count]
             let url = URL(string: self.album.songs[(currentIndex+1) % self.album.songs.count].file)
             self.currentIndex += 1
