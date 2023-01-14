@@ -15,30 +15,30 @@ struct SplashView: View {
     
     @ObservedObject var data : OurData
     
-   
-
+    
+    
     var body: some View {
-      
-            if isActive{
-                ContentView(data : data).edgesIgnoringSafeArea(.top)
-            }else{
-                
-                Color.black
-                    .edgesIgnoringSafeArea(.vertical)
-                    .overlay(
-                        VStack(spacing: 20) {
-                            Image("splash").resizable().frame(width: 170, height: 170, alignment: .center).clipped().cornerRadius(20).shadow(radius: 10)
-                            Text("Tape Head").font(.custom("iCielCadena", size: 35)).foregroundColor(.white)
-                        }.onAppear{
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
-                                self.isActive = true
-                            }
-                        })
-            }
-                
-  
+        
+        if isActive{
+            ContentView(data : data).edgesIgnoringSafeArea(.top)
+        }else{
+            
+            Color.black
+                .edgesIgnoringSafeArea(.vertical)
+                .overlay(
+                    VStack(spacing: 20) {
+                        Image("splash").resizable().frame(width: 170, height: 170, alignment: .center).clipped().cornerRadius(20).shadow(radius: 10)
+                        Text("Tape Head").font(.custom("iCielCadena", size: 35)).foregroundColor(.white)
+                    }.onAppear{
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                            self.isActive = true
+                        }
+                    })
         }
-       
+        
+        
     }
+    
+}
 
 

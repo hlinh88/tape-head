@@ -33,7 +33,7 @@ struct ContentView: View {
     
     @State private var currentAlbum : Album?
     
-
+    
     var body: some View {
         NavigationView{
             GeometryReader{
@@ -71,7 +71,7 @@ struct ContentView: View {
                         }.frame(height: height + safeArea.top)
                         
                         
-                        Text("Welcome to Tape Head").font(.custom("CircularStd-Bold", size: 30)).foregroundColor(Color.white).padding(.bottom, 15)
+                        Text("Welcome to Tape Head").font(.custom("iCielCadena", size: 32)).foregroundColor(Color.white).padding(.bottom, 15)
                         
                         ScrollView(.horizontal, showsIndicators: false, content: {
                             LazyHStack{
@@ -79,7 +79,7 @@ struct ContentView: View {
                                     album in
                                     AlbumArt(album: album, isWithText: true).onTapGesture {
                                         self.currentAlbum = album
-                                       
+                                        
                                     }
                                     
                                 })
@@ -102,24 +102,25 @@ struct ContentView: View {
                                 ForEach(0..<((self.currentAlbum?.songs.count ?? self.data.albums.first?.songs.count) ?? 0), id: \.self) {
                                     i in
                                     SongCell(album: self.currentAlbum ?? self.data.albums.first!, song: self.currentAlbum?.songs[i] ?? self.data.albums.first!.songs[i], index: i)
-                                 
-
+                                    
+                                    
                                 }
+                                
+                            }
+                            
                             
                         }
-                        
+                        .background(.black)
+                        .clipped()
+                        .cornerRadius(20)
+                        .shadow(radius: 10)
                         
                     }
-                    .background(.black)
-                    .clipped()
-                    .cornerRadius(20)
-                    .shadow(radius: 10)
-                    
+                    .background(Color.black.edgesIgnoringSafeArea(.all))
                 }
-                .background(Color.black.edgesIgnoringSafeArea(.all))
-            }
-        }.foregroundColor(Color.white).ignoresSafeArea(.container, edges: .top)
+            }.foregroundColor(Color.white).ignoresSafeArea(.container, edges: .top)
         }.preferredColorScheme(.dark).coordinateSpace(name: "SCROLL")
+        
     }
 }
 

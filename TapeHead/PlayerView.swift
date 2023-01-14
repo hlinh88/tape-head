@@ -29,16 +29,16 @@ struct PlayerView : View{
     @State var timeLabelLeft: String
     @State var timeLabelRight: String
     @State var currentIndex: Int
- 
-    @State var isPlaying : Bool = false
+    
+    @State public var isPlaying : Bool = false
     @State var isAnimating = false
     @State var isShuffle : Bool = false
     @State var isRepeat : Bool = false
     var foreverAnimation: Animation {
-            Animation.linear(duration: 2.0)
-                .repeatForever(autoreverses: false)
-                .speed(0.3)
-        }
+        Animation.linear(duration: 2.0)
+            .repeatForever(autoreverses: false)
+            .speed(0.3)
+    }
     
     
     var body: some View{
@@ -57,7 +57,7 @@ struct PlayerView : View{
                     Spacer()
                     FontIcon.text(.materialIcon(code: .more_horiz), fontsize: 25, color: .white)
                 }.padding(.top, 20).padding(.horizontal, 20).frame(maxWidth: .infinity)
-               
+                
                 Spacer()
                 Image(album.image)
                     .resizable()
@@ -77,13 +77,13 @@ struct PlayerView : View{
                         player.currentItem?.seek(to: CMTimeMake(value: Int64(slider * Float(song.duration)), timescale: 1))
                         
                     }
-            
+                    
                     HStack{
                         Text(self.timeLabelLeft).font(.custom("CircularStd-Medium", size: 12)).foregroundColor(.white)
                         Spacer()
                         Text(self.timeLabelRight).font(.custom("CircularStd-Medium", size: 12)).foregroundColor(.white)
                     }
-                   
+                    
                 }.frame(maxWidth: .infinity).padding(.horizontal, 15)
                 
                 
@@ -115,31 +115,18 @@ struct PlayerView : View{
             
         }.navigationBarBackButtonHidden(true)
             .onAppear(){
-//            let storage = Storage.storage().reference(forURL: self.song.file)
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                updateVideoPlayerSlider()
+                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                    updateSlider()
+                }
+                let url = URL(string: self.album.songs[currentIndex].file)
+                player = AVPlayer(url: url!)
+                player.play()
+   
             }
-            let url = URL(string: self.album.songs[currentIndex].file)
-            player = AVPlayer(url: url!)
-            player.play()
-         
-//            storage.downloadURL { url, error in
-//                if error != nil{
-//                    print(error!)
-//                }else{
-//                    print(url?.absoluteString ?? "")
-//
-//                    player = AVPlayer(url: url!)
-//
-//                    player.play()
-//
-//                }
-//            }
-        }
         
     }
     
- 
+    
     
     func playPause(){
         self.isPlaying.toggle()
@@ -152,26 +139,40 @@ struct PlayerView : View{
     }
     
     func next() {
-        self.song = self.album.songs[(currentIndex+1) % self.album.songs.count]
-        let url = URL(string: self.album.songs[(currentIndex+1) % self.album.songs.count].file)
-        self.currentIndex += 1
-        player = AVPlayer(url: url!)
-        player.play()
-     
+        if self.isShuffle{
+            var randomInt = Int.random(in: 0..<self.album.songs.count)
+            while currentIndex == randomInt{
+                randomInt = Int.random(in: 0..<self.album.songs.count)
+            }
+            currentIndex = randomInt
+            self.song = self.album.songs[currentIndex]
+            let url = URL(string: self.album.songs[currentIndex].file)
+            player = AVPlayer(url: url!)
+            player.play()
+            updateSlider()
+        }
+        else{
+            self.song = self.album.songs[(currentIndex+1) % self.album.songs.count]
+            let url = URL(string: self.album.songs[(currentIndex+1) % self.album.songs.count].file)
+            self.currentIndex += 1
+            player = AVPlayer(url: url!)
+            player.play()
+            updateSlider()
+        }
     }
     
     func previous(){
-
         self.song = self.album.songs[(currentIndex-1) % self.album.songs.count]
         let url = URL(string: self.album.songs[(currentIndex-1) % self.album.songs.count].file)
         self.currentIndex -= 1
         player = AVPlayer(url: url!)
         player.play()
-        
+        updateSlider()
     }
     
     func shuffle(){
         self.isShuffle.toggle()
+        
     }
     
     func replay(){
@@ -179,10 +180,19 @@ struct PlayerView : View{
     }
     
     
-    func updateVideoPlayerSlider() {
+    func updateSlider() {
         let currentSongDuration = Double(self.song.duration)
         let currentTimeInSeconds = CMTimeGetSeconds(player.currentTime())
         let currentTimeLeft = currentSongDuration - currentTimeInSeconds
+        if currentTimeInSeconds == currentSongDuration{
+            print("Yo")
+            self.song = self.album.songs[(currentIndex+1) % self.album.songs.count]
+            let url = URL(string: self.album.songs[(currentIndex+1) % self.album.songs.count].file)
+            self.currentIndex += 1
+            player = AVPlayer(url: url!)
+            player.play()
+            updateSlider()
+        }
         
         let mins = currentTimeInSeconds / 60
         let secs = currentTimeInSeconds.truncatingRemainder(dividingBy: 60)
@@ -203,7 +213,7 @@ struct PlayerView : View{
         self.timeLabelRight = "\(minsStrLeft):\(secsStrLeft)"
         self.slider = Float(currentTimeInSeconds)
         
- 
+        
         if let currentItem = player.currentItem {
             let duration = currentItem.duration
             if (CMTIME_IS_INVALID(duration)) {
@@ -216,7 +226,7 @@ struct PlayerView : View{
         
     }
     
-   
+    
     
     
 }
