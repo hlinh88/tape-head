@@ -39,87 +39,92 @@ struct ContentView: View {
             GeometryReader{
                 let safeArea = $0.safeAreaInsets
                 let size = $0.size
-                ScrollView(.vertical, showsIndicators: false){
-                    VStack{
-                        let height = size.height * 0.2
-                        GeometryReader{proxy in
-                            let minY = proxy.frame(in: .named("SCROLL")).minY
-                            let progress = minY / (height * 0.8)
-                            Image("cover")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .clipped()
-                                .cornerRadius(20)
-                                .shadow(radius: 10)
-                                .frame(width: proxy.size.width, height: proxy.size.height + (minY > 0 ? minY : 0))
-                                .overlay(content: {
-                                    ZStack(alignment: .bottom){
-                                        Rectangle()
-                                            .fill(
-                                                .linearGradient(colors: [
-                                                    .black.opacity(0 - progress),
-                                                    .black.opacity(0.1 - progress),
-                                                    .black.opacity(0.3 - progress),
-                                                    .black.opacity(0.5 - progress),
-                                                    .black.opacity(0.8 - progress),
-                                                    .black.opacity(1 - progress),
-                                                ], startPoint: .top, endPoint: .bottom))
-                                    }
-                                })
-                                .offset(y: -minY)
+                VStack{
+                    ScrollView(.vertical, showsIndicators: false){
+                        VStack{
+                            let height = size.height * 0.2
+                            GeometryReader{proxy in
+                                let minY = proxy.frame(in: .named("SCROLL")).minY
+                                let progress = minY / (height * 0.8)
+                                Image("cover")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipped()
+                                    .cornerRadius(20)
+                                    .shadow(radius: 10)
+                                    .frame(width: proxy.size.width, height: proxy.size.height + (minY > 0 ? minY : 0))
+                                    .overlay(content: {
+                                        ZStack(alignment: .bottom){
+                                            Rectangle()
+                                                .fill(
+                                                    .linearGradient(colors: [
+                                                        .black.opacity(0 - progress),
+                                                        .black.opacity(0.1 - progress),
+                                                        .black.opacity(0.3 - progress),
+                                                        .black.opacity(0.5 - progress),
+                                                        .black.opacity(0.8 - progress),
+                                                        .black.opacity(1 - progress),
+                                                    ], startPoint: .top, endPoint: .bottom))
+                                        }
+                                    })
+                                    .offset(y: -minY)
+                                
+                            }.frame(height: height + safeArea.top)
                             
-                        }.frame(height: height + safeArea.top)
-                        
-                        
-                        Text("Welcome to Tape Head").font(.custom("iCielCadena", size: 32)).foregroundColor(Color.white).padding(.bottom, 15)
-                        
-                        ScrollView(.horizontal, showsIndicators: false, content: {
-                            LazyHStack{
-                                ForEach(self.data.albums, id: \.self, content: {
-                                    album in
-                                    AlbumArt(album: album, isWithText: true).onTapGesture {
-                                        self.currentAlbum = album
+                            
+                            Text("Welcome to Tape Head").font(.custom("iCielCadena", size: 32)).foregroundColor(Color.white).padding(.bottom, 15)
+                            
+                            ScrollView(.horizontal, showsIndicators: false, content: {
+                                LazyHStack{
+                                    ForEach(self.data.albums, id: \.self, content: {
+                                        album in
+                                        AlbumArt(album: album, isWithText: true).onTapGesture {
+                                            self.currentAlbum = album
+                                            
+                                        }
+                                        
+                                    })
+                                }
+                            } )
+                            
+                            Rectangle()
+                                .fill(Color.white)
+                                .frame(height: 1)
+                                .padding(.top, 5)
+                                .padding(.horizontal, 20)
+                                .background(Color.black)
+                            
+                            
+                            LazyVStack{
+                                if self.data.albums.first == nil{
+                                    EmptyView()
+                                }
+                                else{
+                                    ForEach(0..<((self.currentAlbum?.songs.count ?? self.data.albums.first?.songs.count) ?? 0), id: \.self) {
+                                        i in
+                                        SongCell(album: self.currentAlbum ?? self.data.albums.first!, song: self.currentAlbum?.songs[i] ?? self.data.albums.first!.songs[i], index: i)
+                                        
                                         
                                     }
                                     
-                                })
-                            }
-                        } )
-                        
-                        Rectangle()
-                            .fill(Color.white)
-                            .frame(height: 1)
-                            .padding(.top, 5)
-                            .padding(.horizontal, 20)
-                            .background(Color.black)
-                        
-                        
-                        LazyVStack{
-                            if self.data.albums.first == nil{
-                                EmptyView()
-                            }
-                            else{
-                                ForEach(0..<((self.currentAlbum?.songs.count ?? self.data.albums.first?.songs.count) ?? 0), id: \.self) {
-                                    i in
-                                    SongCell(album: self.currentAlbum ?? self.data.albums.first!, song: self.currentAlbum?.songs[i] ?? self.data.albums.first!.songs[i], index: i)
-                                    
-                                    
                                 }
                                 
+                                
                             }
-                            
+                            .background(.black)
+                            .clipped()
+                            .cornerRadius(20)
+                            .shadow(radius: 10)
                             
                         }
-                        .background(.black)
-                        .clipped()
-                        .cornerRadius(20)
-                        .shadow(radius: 10)
-                        
+                        .background(Color.black.edgesIgnoringSafeArea(.all))
                     }
-                    .background(Color.black.edgesIgnoringSafeArea(.all))
-                }
-            }.foregroundColor(Color.white).ignoresSafeArea(.container, edges: .top)
-        }.preferredColorScheme(.dark).coordinateSpace(name: "SCROLL")
+                    MiniPlayer(album: self.currentAlbum ?? self.data.albums.first!)
+                }.foregroundColor(Color.white).ignoresSafeArea(.container, edges: .top)
+            }.preferredColorScheme(.dark).coordinateSpace(name: "SCROLL")
+            
+            
+        }
         
     }
 }
@@ -161,7 +166,10 @@ struct SongCell : View {
                         FontIcon.text(.materialIcon(code: .play_arrow), fontsize: 25, color: .blue)
                     }
                 }
-                Text(song.name).font(.custom("CircularStd-Medium", size: 15)).foregroundColor(Color.white).hoverEffect(.lift)
+                Text(song.name)
+                    .font(.custom("CircularStd-Medium", size: 15))
+                    .foregroundColor(Color.white)
+                    .hoverEffect(.lift)
                 Spacer()
                 Text(song.time).font(.custom("CircularStd-Medium", size: 15)).foregroundColor(Color.white)
             }.padding(20)})
@@ -173,6 +181,32 @@ struct SongCell : View {
     
     
 }
+
+struct MiniPlayer : View {
+    var album : Album
+    
+    var body : some View {
+        ZStack{
+            Color.black.opacity(0.2).cornerRadius(20).shadow(radius: 10)
+            Image(album.image).resizable().edgesIgnoringSafeArea(.all)
+            Blur(style: .dark).edgesIgnoringSafeArea(.all)
+            HStack{
+                Image(album.image).resizable().frame(width: 30, height: 30, alignment: .center).clipped()
+                Spacer()
+                Button(action: self.play ,label: {
+                    Image(systemName: "play.fill").resizable()
+                }).frame(width: 15, height: 15, alignment: .center).foregroundColor(.white)
+            }.padding(.horizontal, 35)
+            
+        }.edgesIgnoringSafeArea(.bottom).frame(height: 35, alignment: .bottom)
+    }
+    
+    func play(){
+        
+    }
+}
+
+
 
 extension UIColor {
     convenience init(hexString: String) {
