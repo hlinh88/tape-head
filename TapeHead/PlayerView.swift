@@ -23,6 +23,9 @@ var timer = Timer()
 struct PlayerView : View{
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
+    @StateObject var global = GlobalVar()
+    
+    
     var album : Album
     @State var song : Song
     @State var slider: Float
@@ -30,7 +33,7 @@ struct PlayerView : View{
     @State var timeLabelRight: String
     @State var currentIndex: Int
     
-    @State public var isPlaying : Bool = false
+//    @State public var global.isPlaying : Bool = false
     @State var isAnimating = false
     @State var isShuffle : Bool = false
     @State var isRepeat : Bool = false
@@ -97,7 +100,7 @@ struct PlayerView : View{
                             Image(systemName: "backward.end.circle.fill").resizable()
                         }).frame(width: 40, height: 40, alignment: .center).foregroundColor(.white).padding(.trailing, 15)
                         Button(action: self.playPause, label: {
-                            Image(systemName: isPlaying ? "play.circle.fill" : "pause.circle.fill").resizable()
+                            Image(systemName: global.isPlaying ? "play.circle.fill" : "pause.circle.fill").resizable()
                         }).frame(width: 60, height: 60, alignment: .center).foregroundColor(.white)
                         Button(action: self.next, label: {
                             Image(systemName: "forward.end.circle.fill").resizable()
@@ -129,9 +132,9 @@ struct PlayerView : View{
     
     
     func playPause(){
-        self.isPlaying.toggle()
+        self.global.isPlaying.toggle()
         self.isAnimating.toggle()
-        if isPlaying{
+        if global.isPlaying{
             player.pause()
         }else{
             player.play()

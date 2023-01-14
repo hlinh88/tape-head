@@ -25,6 +25,10 @@ struct Song : Hashable{
     var duration : Int
 }
 
+class GlobalVar: ObservableObject {
+  @Published var isPlaying = false
+}
+
 
 
 struct ContentView: View {
@@ -32,6 +36,8 @@ struct ContentView: View {
     @ObservedObject var data : OurData
     
     @State private var currentAlbum : Album?
+    
+    @StateObject var global = GlobalVar()
     
     
     var body: some View {
@@ -119,7 +125,9 @@ struct ContentView: View {
                         }
                         .background(Color.black.edgesIgnoringSafeArea(.all))
                     }
+                   
                     MiniPlayer(album: self.currentAlbum ?? self.data.albums.first!)
+                    
                 }.foregroundColor(Color.white).ignoresSafeArea(.container, edges: .top)
             }.preferredColorScheme(.dark).coordinateSpace(name: "SCROLL")
             
@@ -183,26 +191,34 @@ struct SongCell : View {
 }
 
 struct MiniPlayer : View {
+    @StateObject var global = GlobalVar()
+    
     var album : Album
     
     var body : some View {
-        ZStack{
-            Color.black.opacity(0.2).cornerRadius(20).shadow(radius: 10)
-            Image(album.image).resizable().edgesIgnoringSafeArea(.all)
-            Blur(style: .dark).edgesIgnoringSafeArea(.all)
-            HStack{
-                Image(album.image).resizable().frame(width: 30, height: 30, alignment: .center).clipped()
-                Spacer()
-                Button(action: self.play ,label: {
-                    Image(systemName: "play.fill").resizable()
-                }).frame(width: 15, height: 15, alignment: .center).foregroundColor(.white)
-            }.padding(.horizontal, 35)
-            
-        }.edgesIgnoringSafeArea(.bottom).frame(height: 35, alignment: .bottom)
+            ZStack{
+                Color.black.opacity(0.2).cornerRadius(20).shadow(radius: 10)
+                Image(album.image).resizable().edgesIgnoringSafeArea(.all)
+                Blur(style: .dark).edgesIgnoringSafeArea(.all)
+                HStack{
+                    Image(album.image).resizable().frame(width: 30, height: 30, alignment: .center).clipped()
+                    Spacer()
+                    Button(action: self.play ,label: {
+                        Image(systemName: global.isPlaying ? "play.fill" : "pause.fill").resizable()
+                    }).frame(width: 20, height: 20, alignment: .center).foregroundColor(.white)
+                }.padding(.horizontal, 35)
+                
+            }.edgesIgnoringSafeArea(.bottom).frame(height: 35, alignment: .bottom)
+        
     }
     
     func play(){
-        
+        global.isPlaying.toggle()
+        if global.isPlaying{
+            player.pause()
+        }else{
+            player.play()
+        }
     }
 }
 
