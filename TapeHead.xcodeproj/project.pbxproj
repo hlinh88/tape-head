@@ -57,6 +57,7 @@
 		5E0F299829545DF9008D972A /* TapeHeadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TapeHeadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E0F299C29545DF9008D972A /* TapeHeadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeHeadUITests.swift; sourceTree = "<group>"; };
 		5E0F299E29545DF9008D972A /* TapeHeadUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeHeadUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5E698E0629758B9600251B7D /* CircularStd-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CircularStd-Bold.otf"; path = "../../../../Downloads/Circular/CircularStd-Bold.otf"; sourceTree = "<group>"; };
 		5E8AE27E295849B2006B60CE /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		5E8AE28029585DAA006B60CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5E9950C32968770400A604E1 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -172,6 +173,7 @@
 		5E9950C529687D6400A604E1 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				5E698E0629758B9600251B7D /* CircularStd-Bold.otf */,
 				5EA95A0D2968886E00F58075 /* CircularStd-Book.otf */,
 				5EA95A0B2968885900F58075 /* CircularStd-Medium.otf */,
 				5EA95A092968881900F58075 /* CircularStd-Bold.otf */,

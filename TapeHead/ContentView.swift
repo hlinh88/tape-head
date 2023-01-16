@@ -209,10 +209,17 @@ struct MiniPlayer : View {
             Blur(style: .dark).edgesIgnoringSafeArea(.all)
             HStack{
                 Image(album.image).resizable().frame(width: 30, height: 30, alignment: .center).clipped()
-                Text(global.currentSongName)
-                    .font(.custom("CircularStd-Medium", size: 15))
-                    .foregroundColor(Color.white)
-                    .hoverEffect(.lift)
+                VStack(alignment: .leading){
+                    Text(global.currentSongName)
+                        .font(.custom("CircularStd-Bold", size: 15))
+                        .foregroundColor(Color.white)
+                        .hoverEffect(.lift)
+                    Text("Ngọt")
+                        .font(.custom("CircularStd-Medium", size: 12))
+                        .foregroundColor(Color.white.opacity(0.5))
+                        .hoverEffect(.lift)
+                }
+        
                 Spacer()
                 Button(action: self.playPause ,label: {
                     Image(systemName: global.isPlaying ? "play.fill" : "pause.fill").resizable()
