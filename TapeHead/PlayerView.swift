@@ -23,7 +23,7 @@ var timer = Timer()
 struct PlayerView : View{
     @Environment(\.dismiss) var dismiss
     
-    @StateObject var global = GlobalVar()
+    @EnvironmentObject var global : GlobalVar
     
     
     var album : Album
@@ -52,6 +52,8 @@ struct PlayerView : View{
                     HStack {
                         FontIcon.text(.materialIcon(code: .arrow_back), fontsize: 25, color: .white)
                     }.onTapGesture(perform: {
+                        global.isMiniPlay = true
+                        global.currentSongName = self.album.songs[currentIndex].name
                         dismiss()
                     })
                     Spacer()
@@ -117,7 +119,6 @@ struct PlayerView : View{
             
         }.navigationBarBackButtonHidden(true)
             .onAppear(){
-                global.currentSongName = self.album.songs[currentIndex].name
                 timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                     updateSlider()
                 }

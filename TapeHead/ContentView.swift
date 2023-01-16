@@ -29,8 +29,6 @@ class GlobalVar: ObservableObject {
     @Published var isPlaying = false
     @Published var currentSongName = ""
     @Published var isMiniPlay = false
-    
-   
 }
 
 
@@ -140,6 +138,7 @@ struct ContentView: View {
             
             
         }
+        .environmentObject(global)
         
         
     }
@@ -199,7 +198,7 @@ struct SongCell : View {
 }
 
 struct MiniPlayer : View {
-    @StateObject var global = GlobalVar()
+    @EnvironmentObject var global : GlobalVar
     
     var album : Album
     
@@ -221,7 +220,7 @@ struct MiniPlayer : View {
             
             }.padding(.horizontal, 35)
         }.edgesIgnoringSafeArea(.bottom).frame(height: 35, alignment: .bottom)
-        
+      
     }
     
     func playPause(){
