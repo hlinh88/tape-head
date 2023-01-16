@@ -40,7 +40,13 @@ struct ContentView: View {
     
     @State private var currentAlbum : Album?
     
+    @State private var currentSong : Song?
+    
     @StateObject var global = GlobalVar()
+    
+    @State var selectedSongItem: SongItem?
+    
+    @State var isShowingSheet = false
     
     
     var body: some View {
@@ -111,10 +117,32 @@ struct ContentView: View {
                                 else{
                                     ForEach(0..<((self.currentAlbum?.songs.count ?? self.data.albums.first?.songs.count) ?? 0), id: \.self) {
                                         i in
-                                        SongCell(album: self.currentAlbum ?? self.data.albums.first!, song: self.currentAlbum?.songs[i] ?? self.data.albums.first!.songs[i], index: i)
-                                        
-                                        
+                                        //                                        SongCell(album: self.currentAlbum ?? self.data.albums.first!, song: self.currentAlbum?.songs[i] ?? self.data.albums.first!.songs[i], index: i)
+                                        HStack{
+                                            Text("\(i+1)").font(.custom("CircularStd-Bold", size: 15)).foregroundColor(Color.white).padding(.trailing, 20)
+                                            ZStack{
+                                                Image((self.currentAlbum ?? self.data.albums.first!).image).resizable().frame(width: 40, height: 40, alignment: .center).clipped()
+                                            }
+                                            Text((self.currentAlbum?.songs[i] ?? self.data.albums.first!.songs[i]).name)
+                                                .font(.custom("CircularStd-Medium", size: 15))
+                                                .foregroundColor(Color.white)
+                                            Spacer()
+                                            Text((self.currentAlbum?.songs[i] ?? self.data.albums.first!.songs[i]).time).font(.custom("CircularStd-Medium", size: 15)).foregroundColor(Color.white)
+                                        }.padding(20)
+                                            .onTapGesture{
+                                                selectedSongItem = SongItem(album: self.currentAlbum ?? self.data.albums.first!, song: self.currentAlbum?.songs[i] ?? self.data.albums.first!.songs[i], index: i)
+                                            }
                                     }
+                                    .sheet(item: $selectedSongItem){ item in
+                                        PlayerView(album: item.album, song: item.album.songs[item.index], slider: 0, timeLabelLeft: "", timeLabelRight: "", currentIndex: item.index)
+                                    }
+                                    .sheet(isPresented: $isShowingSheet){
+                                        // TODO: Fix
+                                       
+                                    }
+                                
+                                
+                                    
                                     
                                 }
                                 
@@ -130,9 +158,16 @@ struct ContentView: View {
                     }
                     
                     if global.isMiniPlay{
-                        MiniPlayer()
+                        Button(action:{
+                            self.isShowingSheet.toggle()
+                        }, label:{
+                            MiniPlayer()
+                            }
+                        )
+                        
+                        
                     }
-              
+                    
                     
                 }.foregroundColor(Color.white).ignoresSafeArea(.container, edges: .top)
             }.preferredColorScheme(.dark).coordinateSpace(name: "SCROLL")
@@ -162,6 +197,13 @@ struct AlbumArt : View{
         }
         
     }
+}
+
+struct SongItem : Identifiable {
+    let id = UUID()
+    var album : Album
+    var song : Song
+    var index: Int
 }
 
 struct SongCell : View {
@@ -200,7 +242,7 @@ struct SongCell : View {
 
 struct MiniPlayer : View {
     @EnvironmentObject var global : GlobalVar
-
+    
     
     var body : some View {
         ZStack{
@@ -219,15 +261,15 @@ struct MiniPlayer : View {
                         .foregroundColor(Color.white.opacity(0.5))
                         .hoverEffect(.lift)
                 }
-        
+                
                 Spacer()
                 Button(action: self.playPause ,label: {
                     Image(systemName: global.isPlaying ? "play.fill" : "pause.fill").resizable()
                 }).frame(width: 20, height: 20, alignment: .center).foregroundColor(.white)
-            
+                
             }.padding(.horizontal, 35)
         }.edgesIgnoringSafeArea(.bottom).frame(height: 35, alignment: .bottom)
-      
+        
     }
     
     func playPause(){
