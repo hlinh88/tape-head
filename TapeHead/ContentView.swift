@@ -28,6 +28,8 @@ struct Song : Hashable{
 class GlobalVar: ObservableObject {
     @Published var isPlaying = false
     @Published var currentSongName = ""
+    @Published var isMiniPlay = false
+    
    
 }
 
@@ -128,13 +130,17 @@ struct ContentView: View {
                         .background(Color.black.edgesIgnoringSafeArea(.all))
                     }
                     
-                    MiniPlayer(album: self.currentAlbum ?? self.data.albums.first!)
+                    if global.isMiniPlay{
+                        MiniPlayer(album: self.currentAlbum ?? self.data.albums.first!)
+                    }
+              
                     
                 }.foregroundColor(Color.white).ignoresSafeArea(.container, edges: .top)
             }.preferredColorScheme(.dark).coordinateSpace(name: "SCROLL")
             
             
         }
+        
         
     }
 }

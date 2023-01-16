@@ -21,7 +21,7 @@ var timer = Timer()
 
 
 struct PlayerView : View{
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismiss
     
     @StateObject var global = GlobalVar()
     
@@ -33,7 +33,6 @@ struct PlayerView : View{
     @State var timeLabelRight: String
     @State var currentIndex: Int
     
-//    @State public var global.isPlaying : Bool = false
     @State var isAnimating = false
     @State var isShuffle : Bool = false
     @State var isRepeat : Bool = false
@@ -53,7 +52,7 @@ struct PlayerView : View{
                     HStack {
                         FontIcon.text(.materialIcon(code: .arrow_back), fontsize: 25, color: .white)
                     }.onTapGesture(perform: {
-                        self.mode.wrappedValue.dismiss()
+                        dismiss()
                     })
                     Spacer()
                     Text(album.name).font(.custom("CircularStd-Bold", size: 15)).foregroundColor(.white).multilineTextAlignment(.center)
