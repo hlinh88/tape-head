@@ -28,6 +28,7 @@ struct Song : Hashable{
 class GlobalVar: ObservableObject {
     @Published var isPlaying = false
     @Published var currentSongName = ""
+    @Published var currentImage = ""
     @Published var isMiniPlay = false
 }
 
@@ -129,7 +130,7 @@ struct ContentView: View {
                     }
                     
                     if global.isMiniPlay{
-                        MiniPlayer(album: self.currentAlbum ?? self.data.albums.first!)
+                        MiniPlayer()
                     }
               
                     
@@ -199,16 +200,15 @@ struct SongCell : View {
 
 struct MiniPlayer : View {
     @EnvironmentObject var global : GlobalVar
-    
-    var album : Album
+
     
     var body : some View {
         ZStack{
             Color.black.opacity(0.2).cornerRadius(20).shadow(radius: 10)
-            Image(album.image).resizable().edgesIgnoringSafeArea(.all)
+            Image(global.currentImage).resizable().edgesIgnoringSafeArea(.all)
             Blur(style: .dark).edgesIgnoringSafeArea(.all)
             HStack{
-                Image(album.image).resizable().frame(width: 30, height: 30, alignment: .center).clipped()
+                Image(global.currentImage).resizable().frame(width: 30, height: 30, alignment: .center).clipped()
                 VStack(alignment: .leading){
                     Text(global.currentSongName)
                         .font(.custom("CircularStd-Bold", size: 15))

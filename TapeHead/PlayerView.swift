@@ -54,6 +54,7 @@ struct PlayerView : View{
                     }.onTapGesture(perform: {
                         global.isMiniPlay = true
                         global.currentSongName = self.album.songs[currentIndex].name
+                        global.currentImage = self.album.image
                         dismiss()
                     })
                     Spacer()
