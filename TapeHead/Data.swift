@@ -46,7 +46,6 @@ class OurData : ObservableObject{
                             let songDuration = song.value["duration"] as? Int ?? 0
                             let songOrder = song.value["order"] as? Int ?? 0
                             songsArray[songOrder-1] = Song(name: songName, time: songTime, file: songFile, duration: songDuration)
-//                            songsArray.insert(Song(name: songName, time: songTime, file: songFile, duration: songDuration), at: songOrder-1)
                         }
                     }
                     self.albums.append(Album(name: name, image: image, songs: songsArray))

@@ -125,6 +125,7 @@ struct PlayerView : View{
                     updateSlider()
                 }
                 if playerActive{
+                    global.isPlaying = false
                     let url = URL(string: self.album.songs[currentIndex].file)
                     player = AVPlayer(url: url!)
                     player.play()
