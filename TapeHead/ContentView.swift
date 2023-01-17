@@ -107,14 +107,8 @@ struct ContentView: View {
                             }
                             ).padding(.horizontal, 20)
                             
-                            Rectangle()
-                                .fill(Color.white)
-                                .frame(height: 1)
-                                .padding(.top, 5)
-                                .padding(.horizontal, 20)
-                                .background(Color.black)
-                            
-                            
+                            TableHeader()
+
                             LazyVStack{
                                 if self.data.albums.first == nil{
                                     EmptyView()
@@ -203,6 +197,36 @@ struct SongItem : Identifiable {
     var index: Int
 }
 
+struct TableHeader : View {
+    var body: some View{
+        VStack{
+            HStack{
+                Text("#")
+                    .font(.custom("CircularStd-Bold", size: 15))
+                    .foregroundColor(Color.white)
+                    .padding(.trailing, 20)
+                Text("TITLE")
+                    .font(.custom("CircularStd-Bold", size: 15))
+                    .foregroundColor(Color.white)
+                Spacer()
+                Image(systemName: "clock.fill")
+                    .resizable()
+                    .frame(width: 15, height: 15, alignment: .center)
+                    .foregroundColor(.white)
+            }
+            .padding(.horizontal, 20)
+            
+            Rectangle()
+                .fill(Color.white)
+                .frame(height: 1)
+                .padding(.top, 5)
+                .padding(.horizontal, 20)
+                .background(Color.black)
+        }
+       
+    }
+}
+
 struct SongCell : View {
     var album : Album
     var song : Song
@@ -210,10 +234,9 @@ struct SongCell : View {
     var body: some View{
         HStack{
             Text("\(index+1)").font(.custom("CircularStd-Bold", size: 15)).foregroundColor(Color.white).padding(.trailing, 20)
-            ZStack{
-                Image(album.image).resizable().frame(width: 40, height: 40, alignment: .center).clipped()
+         
+            Image(album.image).resizable().frame(width: 40, height: 40, alignment: .center).clipped()
         
-            }
             Text(song.name)
                 .font(.custom("CircularStd-Medium", size: 15))
                 .foregroundColor(Color.white)
