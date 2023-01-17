@@ -32,6 +32,7 @@ struct PlayerView : View{
     @State var timeLabelLeft: String
     @State var timeLabelRight: String
     @State var currentIndex: Int
+    @State var playerActive : Bool
     
     @State var isAnimating = false
     @State var isShuffle : Bool = false
@@ -123,10 +124,12 @@ struct PlayerView : View{
                 timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                     updateSlider()
                 }
-                let url = URL(string: self.album.songs[currentIndex].file)
-                player = AVPlayer(url: url!)
-                player.play()
-   
+                if playerActive{
+                    let url = URL(string: self.album.songs[currentIndex].file)
+                    player = AVPlayer(url: url!)
+                    player.play()
+                }
+  
             }
         
     }

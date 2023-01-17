@@ -46,6 +46,8 @@ struct ContentView: View {
     
     @State var selectedSongItem: SongItem?
     
+    @State var currentSongItem: SongItem?
+    
     @State var isShowingSheet = false
     
     
@@ -117,36 +119,20 @@ struct ContentView: View {
                                 else{
                                     ForEach(0..<((self.currentAlbum?.songs.count ?? self.data.albums.first?.songs.count) ?? 0), id: \.self) {
                                         i in
-                                        //                                        SongCell(album: self.currentAlbum ?? self.data.albums.first!, song: self.currentAlbum?.songs[i] ?? self.data.albums.first!.songs[i], index: i)
-                                        HStack{
-                                            Text("\(i+1)").font(.custom("CircularStd-Bold", size: 15)).foregroundColor(Color.white).padding(.trailing, 20)
-                                            ZStack{
-                                                Image((self.currentAlbum ?? self.data.albums.first!).image).resizable().frame(width: 40, height: 40, alignment: .center).clipped()
-                                            }
-                                            Text((self.currentAlbum?.songs[i] ?? self.data.albums.first!.songs[i]).name)
-                                                .font(.custom("CircularStd-Medium", size: 15))
-                                                .foregroundColor(Color.white)
-                                            Spacer()
-                                            Text((self.currentAlbum?.songs[i] ?? self.data.albums.first!.songs[i]).time).font(.custom("CircularStd-Medium", size: 15)).foregroundColor(Color.white)
-                                        }.padding(20)
+                                        SongCell(album: self.currentAlbum ?? self.data.albums.first!, song: self.currentAlbum?.songs[i] ?? self.data.albums.first!.songs[i], index: i)
                                             .onTapGesture{
                                                 selectedSongItem = SongItem(album: self.currentAlbum ?? self.data.albums.first!, song: self.currentAlbum?.songs[i] ?? self.data.albums.first!.songs[i], index: i)
+                                                currentSongItem = SongItem(album: self.currentAlbum ?? self.data.albums.first!, song: self.currentAlbum?.songs[i] ?? self.data.albums.first!.songs[i], index: i)
                                             }
                                     }
                                     .sheet(item: $selectedSongItem){ item in
-                                        PlayerView(album: item.album, song: item.album.songs[item.index], slider: 0, timeLabelLeft: "", timeLabelRight: "", currentIndex: item.index)
+                                        PlayerView(album: item.album, song: item.album.songs[item.index], slider: 0, timeLabelLeft: "", timeLabelRight: "", currentIndex: item.index, playerActive: true)
                                     }
                                     .sheet(isPresented: $isShowingSheet){
-                                        // TODO: Fix
-                                       
+                                        PlayerView(album: currentSongItem!.album, song: currentSongItem!.album.songs[currentSongItem!.index], slider: 0, timeLabelLeft: "", timeLabelRight: "", currentIndex: currentSongItem!.index, playerActive: false)
+                                        
                                     }
-                                
-                                
-                                    
-                                    
                                 }
-                                
-                                
                             }
                             .background(.black)
                             .clipped()
@@ -162,17 +148,11 @@ struct ContentView: View {
                             self.isShowingSheet.toggle()
                         }, label:{
                             MiniPlayer()
-                            }
+                        }
                         )
-                        
-                        
                     }
-                    
-                    
                 }.foregroundColor(Color.white).ignoresSafeArea(.container, edges: .top)
             }.preferredColorScheme(.dark).coordinateSpace(name: "SCROLL")
-            
-            
         }
         .environmentObject(global)
         
@@ -210,32 +190,20 @@ struct SongCell : View {
     var album : Album
     var song : Song
     var index: Int
-    
-    @State var onHover = false
     var body: some View{
-        NavigationLink(destination: PlayerView(album: album, song: album.songs[index], slider: 0, timeLabelLeft: "", timeLabelRight: "", currentIndex: index),
-                       label: {
-            HStack{
-                Text("\(index+1)").font(.custom("CircularStd-Bold", size: 15)).foregroundColor(Color.white).padding(.trailing, 20)
-                ZStack{
-                    Image(album.image).resizable().frame(width: 40, height: 40, alignment: .center).clipped()
-                    
-                    if onHover{
-                        FontIcon.text(.materialIcon(code: .play_arrow), fontsize: 25, color: .blue)
-                    }
-                }
-                Text(song.name)
-                    .font(.custom("CircularStd-Medium", size: 15))
-                    .foregroundColor(Color.white)
-                    .hoverEffect(.lift)
-                Spacer()
-                Text(song.time).font(.custom("CircularStd-Medium", size: 15)).foregroundColor(Color.white)
-            }.padding(20)})
-        .buttonStyle(PlainButtonStyle())
-        .onHover{hover in
-            self.onHover.toggle()
-        }
-    }
+        HStack{
+            Text("\(index+1)").font(.custom("CircularStd-Bold", size: 15)).foregroundColor(Color.white).padding(.trailing, 20)
+            ZStack{
+                Image(album.image).resizable().frame(width: 40, height: 40, alignment: .center).clipped()
+        
+            }
+            Text(song.name)
+                .font(.custom("CircularStd-Medium", size: 15))
+                .foregroundColor(Color.white)
+                .hoverEffect(.lift)
+            Spacer()
+            Text(song.time).font(.custom("CircularStd-Medium", size: 15)).foregroundColor(Color.white)
+        }.padding(20)}
     
     
 }
