@@ -10,7 +10,7 @@ Tape Head music streaming app displays albums with music tracks in those albums.
 
 ## Showcase
 
-![](showcase1.png) ![](showcase2.png) ![](showcase3.png) ![](showcase4.png)
+![](TapeHead/showcase1.png) ![](TapeHead/showcase2.png) ![](TapeHead/showcase3.png) ![](TapeHead/showcase4.png)
 
 ## Installation
 
