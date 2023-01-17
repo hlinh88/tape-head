@@ -14,7 +14,7 @@ struct Album : Hashable{
     var name : String
     var image : String
     var songs : [Song]
-    
+    var year : String
 }
 
 struct Song : Hashable{
@@ -91,18 +91,21 @@ struct ContentView: View {
                             
                             Text("Welcome to Tape Head").font(.custom("iCielCadena", size: 32)).foregroundColor(Color.white).padding(.bottom, 15)
                             
-                            ScrollView(.horizontal, showsIndicators: false, content: {
-                                LazyHStack{
+                            ScrollView(showsIndicators: false, content: {
+                                LazyVGrid(columns: [GridItem(.flexible()),
+                                                 GridItem(.flexible())]
+                                          , spacing: 20){
                                     ForEach(self.data.albums, id: \.self, content: {
                                         album in
-                                        AlbumArt(album: album, isWithText: true).onTapGesture {
+                                        AlbumArt(album: album).onTapGesture {
                                             self.currentAlbum = album
                                             
                                         }
                                         
                                     })
                                 }
-                            } )
+                            }
+                            ).padding(.horizontal, 20)
                             
                             Rectangle()
                                 .fill(Color.white)
@@ -163,15 +166,29 @@ struct ContentView: View {
 
 struct AlbumArt : View{
     var album : Album
-    var isWithText : Bool
     var body: some View{
         LazyVStack{
-            Image(album.image).resizable().frame(width: 180, height: 180, alignment: .center).clipped().cornerRadius(20).shadow(color: .white, radius: 10).padding(.horizontal, 20).padding(.top, 5)
-            if isWithText == true {
-                Text(album.name).font(.custom("CircularStd-Bold", size: 20))
-                    .foregroundColor(Color.white)
-                    .lineLimit(1)
-            }
+            Image(album.image).resizable()
+                .frame(width: 150, height: 150, alignment: .center)
+                .clipped()
+                .cornerRadius(20)
+                .shadow(color: .white, radius: 5)
+                .padding(.horizontal, 20)
+                .padding(.top, 5)
+            Text(album.name).font(.custom("CircularStd-Bold", size: 18))
+                .foregroundColor(Color.white)
+                .lineLimit(1)
+                .frame(width: 150, alignment: .leading)
+            Spacer()
+            Text("Ngọt | \(album.year)")
+                .font(.custom("CircularStd-Medium", size: 13))
+                .foregroundColor(Color.white.opacity(0.5))
+                .frame(width: 150, alignment: .leading)
+            Spacer()
+            Text("\(album.songs.count) songs")
+                .font(.custom("CircularStd-Medium", size: 13))
+                .foregroundColor(Color.white.opacity(0.5))
+                .frame(width: 150, alignment: .leading)
             Spacer()
             
         }
