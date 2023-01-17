@@ -15,6 +15,10 @@
 		5E0F299D29545DF9008D972A /* TapeHeadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0F299C29545DF9008D972A /* TapeHeadUITests.swift */; };
 		5E0F299F29545DF9008D972A /* TapeHeadUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0F299E29545DF9008D972A /* TapeHeadUITestsLaunchTests.swift */; };
 		5E68FD43296818E500E7808D /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = 5E68FD42296818E500E7808D /* SwiftUIFontIcon */; };
+		5E815A642976B65A00A160DC /* showcase3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E815A602976B65A00A160DC /* showcase3.png */; };
+		5E815A652976B65A00A160DC /* showcase4.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E815A612976B65A00A160DC /* showcase4.png */; };
+		5E815A662976B65A00A160DC /* showcase1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E815A622976B65A00A160DC /* showcase1.png */; };
+		5E815A672976B65A00A160DC /* showcase2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E815A632976B65A00A160DC /* showcase2.png */; };
 		5E8AE27F295849B2006B60CE /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8AE27E295849B2006B60CE /* Blur.swift */; };
 		5E8AE28129585DAA006B60CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E8AE28029585DAA006B60CE /* GoogleService-Info.plist */; };
 		5E8AE28429587505006B60CE /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 5E8AE28329587505006B60CE /* FirebaseDatabase */; };
@@ -58,6 +62,10 @@
 		5E0F299C29545DF9008D972A /* TapeHeadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeHeadUITests.swift; sourceTree = "<group>"; };
 		5E0F299E29545DF9008D972A /* TapeHeadUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeHeadUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5E698E0629758B9600251B7D /* CircularStd-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CircularStd-Bold.otf"; path = "../../../../Downloads/Circular/CircularStd-Bold.otf"; sourceTree = "<group>"; };
+		5E815A602976B65A00A160DC /* showcase3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showcase3.png; sourceTree = "<group>"; };
+		5E815A612976B65A00A160DC /* showcase4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showcase4.png; sourceTree = "<group>"; };
+		5E815A622976B65A00A160DC /* showcase1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showcase1.png; sourceTree = "<group>"; };
+		5E815A632976B65A00A160DC /* showcase2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showcase2.png; sourceTree = "<group>"; };
 		5E8AE27E295849B2006B60CE /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		5E8AE28029585DAA006B60CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5E9950C32968770400A604E1 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -123,6 +131,10 @@
 		5E0F298029545DF5008D972A /* TapeHead */ = {
 			isa = PBXGroup;
 			children = (
+				5E815A622976B65A00A160DC /* showcase1.png */,
+				5E815A632976B65A00A160DC /* showcase2.png */,
+				5E815A602976B65A00A160DC /* showcase3.png */,
+				5E815A612976B65A00A160DC /* showcase4.png */,
 				5E9950C529687D6400A604E1 /* Font */,
 				5ED13AFB2959894400B4C0A5 /* Info.plist */,
 				5E8AE28029585DAA006B60CE /* GoogleService-Info.plist */,
@@ -296,12 +308,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E815A672976B65A00A160DC /* showcase2.png in Resources */,
 				5EA95A0A2968881900F58075 /* CircularStd-Bold.otf in Resources */,
 				5E0F298929545DF9008D972A /* Preview Assets.xcassets in Resources */,
 				5E0F298629545DF9008D972A /* Assets.xcassets in Resources */,
 				5EA95A0E2968886E00F58075 /* CircularStd-Book.otf in Resources */,
+				5E815A652976B65A00A160DC /* showcase4.png in Resources */,
+				5E815A662976B65A00A160DC /* showcase1.png in Resources */,
 				5E8AE28129585DAA006B60CE /* GoogleService-Info.plist in Resources */,
 				5E9950C929687F3100A604E1 /* iCielCadena.ttf in Resources */,
+				5E815A642976B65A00A160DC /* showcase3.png in Resources */,
 				5EA95A0C2968885900F58075 /* CircularStd-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
