@@ -93,19 +93,17 @@ struct ContentView: View {
                             }.frame(height: height + safeArea.top)
                             
                             
-                            Text("Welcome to Tape Head").font(.custom("iCielCadena", size: 32)).foregroundColor(Color.white).padding(.bottom, 15)
+                            Text("TAPE HEAD").font(.custom("iCielCadena", size: 32)).foregroundColor(Color.white).padding(.bottom, 15)
                             
                             ScrollView(showsIndicators: false, content: {
-                                LazyVGrid(columns: [GridItem(.flexible()),
-                                                 GridItem(.flexible())]
+                                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]
                                           , spacing: 20){
                                     ForEach(self.data.albums, id: \.self, content: {
                                         album in
-                                        AlbumArt(album: album).onTapGesture {
-                                            self.currentAlbum = album
-                                            
-                                        }
-                                        
+                                        AlbumArt(album: album)
+                                            .onTapGesture {
+                                                self.currentAlbum = album
+                                            }
                                     })
                                 }
                             }
@@ -131,7 +129,6 @@ struct ContentView: View {
                                     }
                                     .sheet(isPresented: $isShowingSheet){
                                         PlayerView(album: currentSongItem!.album, song: currentSongItem!.album.songs[currentSongItem!.index], slider: 0, timeLabelLeft: "", timeLabelRight: "", currentIndex: currentSongItem!.index, playerActive: false)
-                                        
                                     }
                                 }
                             }
@@ -247,7 +244,9 @@ struct SongCell : View {
                 .hoverEffect(.lift)
             Spacer()
             Text(song.time).font(.custom("CircularStd-Medium", size: 15)).foregroundColor(Color.white)
-        }.padding(20)}
+        }
+        .padding(20)
+    }
     
     
 }
