@@ -56,6 +56,8 @@ struct PlayerView : View{
                         global.isMiniPlay = true
                         global.currentSongName = self.album.songs[currentIndex].name
                         global.currentImage = self.album.image
+                        global.currentSongDuration = Double(self.song.duration)
+                        global.currentSongTime = CMTimeGetSeconds(player.currentTime())
                         dismiss()
                     })
                     Spacer()

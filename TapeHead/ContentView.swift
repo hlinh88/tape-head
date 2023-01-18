@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import SwiftUIFontIcon
+import AVFoundation
 
 struct Album : Hashable{
     var id = UUID()
@@ -30,6 +31,9 @@ class GlobalVar: ObservableObject {
     @Published var currentSongName = ""
     @Published var currentImage = ""
     @Published var isMiniPlay = false
+    @Published var currentSongDuration = 0.0
+    @Published var currentSongTime = 0.0
+
 }
 
 
@@ -250,13 +254,15 @@ struct SongCell : View {
 
 struct MiniPlayer : View {
     @EnvironmentObject var global : GlobalVar
-    
-    
     var body : some View {
         ZStack{
             Color.black.opacity(0.2).cornerRadius(20).shadow(radius: 10)
             Image(global.currentImage).resizable().edgesIgnoringSafeArea(.all)
             Blur(style: .dark).edgesIgnoringSafeArea(.all)
+            ProgressView(value: global.currentSongTime, total: global.currentSongDuration)
+                .progressViewStyle(.linear)
+                .frame(maxHeight: .infinity, alignment: .top)
+                .tint(Color(UIColor(hexString: "#1DB954")))
             HStack{
                 Image(global.currentImage).resizable().frame(width: 30, height: 30, alignment: .center).clipped()
                 VStack(alignment: .leading){
@@ -276,7 +282,13 @@ struct MiniPlayer : View {
                 }).frame(width: 20, height: 20, alignment: .center).foregroundColor(.white)
                 
             }.padding(.horizontal, 35)
-        }.edgesIgnoringSafeArea(.bottom).frame(height: 35, alignment: .bottom)
+        }
+        .edgesIgnoringSafeArea(.bottom).frame(height: 35, alignment: .bottom)
+        .onAppear{
+                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                    global.currentSongTime = CMTimeGetSeconds(player.currentTime())
+                }
+            }
         
     }
     
