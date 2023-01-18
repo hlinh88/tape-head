@@ -15,7 +15,6 @@
 		5E0F299D29545DF9008D972A /* TapeHeadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0F299C29545DF9008D972A /* TapeHeadUITests.swift */; };
 		5E0F299F29545DF9008D972A /* TapeHeadUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0F299E29545DF9008D972A /* TapeHeadUITestsLaunchTests.swift */; };
 		5E645ECF2976D16C00167C12 /* showcase3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E645ECB2976D16C00167C12 /* showcase3.png */; };
-		5E645ED02976D16C00167C12 /* showcase4.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E645ECC2976D16C00167C12 /* showcase4.png */; };
 		5E645ED12976D16C00167C12 /* showcase2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E645ECD2976D16C00167C12 /* showcase2.png */; };
 		5E645ED22976D16C00167C12 /* showcase1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E645ECE2976D16C00167C12 /* showcase1.png */; };
 		5E68FD43296818E500E7808D /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = 5E68FD42296818E500E7808D /* SwiftUIFontIcon */; };
@@ -30,6 +29,7 @@
 		5EA95A0A2968881900F58075 /* CircularStd-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5EA95A092968881900F58075 /* CircularStd-Bold.otf */; };
 		5EA95A0C2968885900F58075 /* CircularStd-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5EA95A0B2968885900F58075 /* CircularStd-Medium.otf */; };
 		5EA95A0E2968886E00F58075 /* CircularStd-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5EA95A0D2968886E00F58075 /* CircularStd-Book.otf */; };
+		5ED65E68297822C70097D577 /* showcase4.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ED65E67297822C70097D577 /* showcase4.png */; };
 		5EEF6CDB2955BBB5004CA155 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF6CDA2955BBB5004CA155 /* PlayerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +62,6 @@
 		5E0F299C29545DF9008D972A /* TapeHeadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeHeadUITests.swift; sourceTree = "<group>"; };
 		5E0F299E29545DF9008D972A /* TapeHeadUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeHeadUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5E645ECB2976D16C00167C12 /* showcase3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showcase3.png; sourceTree = "<group>"; };
-		5E645ECC2976D16C00167C12 /* showcase4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showcase4.png; sourceTree = "<group>"; };
 		5E645ECD2976D16C00167C12 /* showcase2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showcase2.png; sourceTree = "<group>"; };
 		5E645ECE2976D16C00167C12 /* showcase1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showcase1.png; sourceTree = "<group>"; };
 		5E698E0629758B9600251B7D /* CircularStd-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CircularStd-Bold.otf"; path = "../../../../Downloads/Circular/CircularStd-Bold.otf"; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		5EA95A0B2968885900F58075 /* CircularStd-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Medium.otf"; sourceTree = "<group>"; };
 		5EA95A0D2968886E00F58075 /* CircularStd-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Book.otf"; sourceTree = "<group>"; };
 		5ED13AFB2959894400B4C0A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5ED65E67297822C70097D577 /* showcase4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showcase4.png; sourceTree = "<group>"; };
 		5EEF6CDA2955BBB5004CA155 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,7 +134,7 @@
 				5E645ECE2976D16C00167C12 /* showcase1.png */,
 				5E645ECD2976D16C00167C12 /* showcase2.png */,
 				5E645ECB2976D16C00167C12 /* showcase3.png */,
-				5E645ECC2976D16C00167C12 /* showcase4.png */,
+				5ED65E67297822C70097D577 /* showcase4.png */,
 				5E9950C529687D6400A604E1 /* Font */,
 				5ED13AFB2959894400B4C0A5 /* Info.plist */,
 				5E8AE28029585DAA006B60CE /* GoogleService-Info.plist */,
@@ -316,7 +316,7 @@
 				5E0F298629545DF9008D972A /* Assets.xcassets in Resources */,
 				5EA95A0E2968886E00F58075 /* CircularStd-Book.otf in Resources */,
 				5E8AE28129585DAA006B60CE /* GoogleService-Info.plist in Resources */,
-				5E645ED02976D16C00167C12 /* showcase4.png in Resources */,
+				5ED65E68297822C70097D577 /* showcase4.png in Resources */,
 				5E9950C929687F3100A604E1 /* iCielCadena.ttf in Resources */,
 				5EA95A0C2968885900F58075 /* CircularStd-Medium.otf in Resources */,
 			);
