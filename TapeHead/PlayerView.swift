@@ -81,7 +81,6 @@ struct PlayerView : View{
                 
                 VStack{
                     Slider(value: $slider){editing in
-                        
                         player.currentItem?.seek(to: CMTimeMake(value: Int64(slider * Float(song.duration)), timescale: 1))
                         
                     }

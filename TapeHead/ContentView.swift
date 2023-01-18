@@ -93,7 +93,7 @@ struct ContentView: View {
                             }.frame(height: height + safeArea.top)
                             
                             
-                            Text("TAPE HEAD").font(.custom("iCielCadena", size: 32)).foregroundColor(Color.white).padding(.bottom, 15)
+                            Text("TAPE HEAD").font(.custom("iCielCadena", size: 35)).foregroundColor(Color.white).padding(.bottom, 15)
                             
                             ScrollView(showsIndicators: false, content: {
                                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]
@@ -104,6 +104,7 @@ struct ContentView: View {
                                             .onTapGesture {
                                                 self.currentAlbum = album
                                             }
+                                            .background(self.currentAlbum == album ? .gray.opacity(0.3) : Color.black)
                                     })
                                 }
                             }
@@ -185,10 +186,10 @@ struct AlbumArt : View{
                 .foregroundColor(Color.white.opacity(0.5))
                 .frame(width: 150, alignment: .leading)
             Spacer()
-            
         }
-        
+        .cornerRadius(10)
     }
+   
 }
 
 struct SongItem : Identifiable {
