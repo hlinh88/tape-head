@@ -8,6 +8,13 @@
 
 Tape Head music streaming app displays albums with music tracks in those albums. The app will navigate to Player View to play the selected song with multiple options such as Play/Pause, Play Next, Play Previous, Slider Timeline, Shuffle, and On Repeat. The app also provide Mini Player View which allows users to interact with the player on main View as well.
 
+## Demo
+
+<p align="center">
+  <img src="TapeHead/demo.gif" alt="showcase" width="180"/>
+ </p>
+
+
 ## Showcase
 
 <img src="TapeHead/showcase1.png" alt="showcase" width="180"/> &nbsp;&nbsp; <img src="TapeHead/showcase2.png" alt="showcase" width="180"/> &nbsp;&nbsp; <img src="TapeHead/showcase3.png" alt="showcase" width="180"/> &nbsp;&nbsp; <img src="TapeHead/showcase4.png" alt="showcase" width="180"/>
